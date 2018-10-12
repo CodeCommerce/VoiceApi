@@ -1,0 +1,20 @@
+{
+  "name": "CodeCommerce/AlexaApi",
+  "description": "",
+  "version": "1.0",
+  "homepage": "https://www.codecommerce.de",
+  "author": {
+    "name": "Christopher Bauer",
+    "email": "chris@codecommerce.de",
+    "homepage": "https://www.codecommerce.de"
+  },
+  "support": {
+    "email": "info@codecommerce.de",
+    "homepage": "https://www.codecommerce.de"
+  },
+  "autoload": {
+    "psr-4": {
+      "CodeCommerce\\AlexaApi\\": "./"
+    }
+  }
+}

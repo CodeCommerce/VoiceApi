@@ -1,21 +1,24 @@
 {
-    "name": "codecommerce/alexa_api",
-    "type": "library",
-    "require": {
-        "monolog/monolog": "^1.23"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^7.4"
-    },
-    "authors": [
-        {
-            "name": "C. Bauer",
-            "email": "info@codecommerce.de"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "CodeCommerce\\AlexaApi\\": "./AlexaApi/"
-        }
+  "name": "codecommerce/alexa_api",
+  "type": "library",
+  "require": {
+    "monolog/monolog": "^1.23",
+    "CodeCommerce/AlexaApi": "^1.0",
+    "symfony/yaml": "^4.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.4"
+  },
+  "authors": [
+    {
+      "name": "C. Bauer",
+      "email": "info@codecommerce.de"
     }
+  ],
+  "repositories": {
+    "CodeCommerce/AlexaApi": {
+      "type": "path",
+      "url": "./AlexaApi/"
+    }
+  }
 }

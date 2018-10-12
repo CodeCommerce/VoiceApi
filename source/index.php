@@ -1,6 +1,7 @@
 <?php
+require __DIR__ . '/../vendor/autoload.php';
 
-$t = 1;
-echo "test";
+$test_request = file_get_contents(__DIR__ . '/../AlexaRequests/StandardRequest.json');
 
-$request = new CodeCommerce\AlexaApi\Controller\RequestHandler();
+$json = json_decode($test_request);
+$request = new CodeCommerce\AlexaApi\Controller\RequestHandler($json);
