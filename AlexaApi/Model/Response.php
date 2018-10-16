@@ -11,16 +11,6 @@ class Response
     /**
      * @var
      */
-    protected $version;
-
-    /**
-     * @var
-     */
-    protected $sessionAttributes;
-
-    /**
-     * @var
-     */
     protected $outputSpeech;
 
     /**
@@ -32,44 +22,6 @@ class Response
      * @var
      */
     protected $shouldEndSession;
-
-    /**
-     * @return mixed
-     */
-    public function getVersion()
-    {
-        return $this->version;
-    }
-
-    /**
-     * @param mixed $version
-     * @return Response
-     */
-    public function setVersion($version)
-    {
-        $this->version = $version;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSessionAttributes()
-    {
-        return $this->sessionAttributes;
-    }
-
-    /**
-     * @param mixed $sessionAttributes
-     * @return Response
-     */
-    public function setSessionAttributes($sessionAttributes)
-    {
-        $this->sessionAttributes = $sessionAttributes;
-
-        return $this;
-    }
 
     /**
      * @return mixed

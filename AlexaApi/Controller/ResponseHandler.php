@@ -1,28 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Chris
- * Date: 16.10.18
- * Time: 16:22
- */
 
 namespace CodeCommerce\AlexaApi\Controller;
 
-
 use CodeCommerce\AlexaApi\Core\ResponseFormatter;
-use CodeCommerce\AlexaApi\Model\Response;
+use CodeCommerce\AlexaApi\Model\ResponseBody;
 
 class ResponseHandler
 {
-    public function sendResponse(Response $response)
+    public function sendResponse(ResponseBody $responseBody)
     {
         $this->addHeader();
-        $responseFormatter = new ResponseFormatter($response);
+        $responseFormatter = new ResponseFormatter($responseBody);
         echo $responseFormatter->getFormattedResponse();
     }
 
     protected function addHeader()
     {
-//        header('Content-Type: application/json');
+        header('Content-Type: application/json');
     }
 }

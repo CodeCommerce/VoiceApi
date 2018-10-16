@@ -2,7 +2,6 @@
 
 namespace CodeCommerce\AlexaApi\Core;
 
-use CodeCommerce\AlexaApi\Model\Response;
 use CodeCommerce\AlexaApi\Model\ResponseBody;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -12,9 +11,9 @@ class ResponseFormatter
 {
     protected $formattedResponse;
 
-    public function __construct(Response $response)
+    public function __construct(ResponseBody $responseBody)
     {
-        $this->formattedResponse = $this->formatResponse($response);
+        $this->formattedResponse = $this->formatResponse($responseBody);
     }
 
     public function getFormattedResponse()
@@ -22,12 +21,8 @@ class ResponseFormatter
         return $this->formattedResponse;
     }
 
-    protected function formatResponse(Response $response)
+    protected function formatResponse(ResponseBody $responseBody)
     {
-        $responseBody = new ResponseBody();
-        $responseBody->setVersion($response->getVersion());
-        $responseBody->setResponse($response);
-
         return $this->serializeResponse($responseBody);
     }
 

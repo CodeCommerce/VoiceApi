@@ -7,6 +7,11 @@ class ResponseBody
     protected $version;
     protected $response;
 
+    public function __construct()
+    {
+        $this->setVersion('1.0');
+    }
+
     /**
      * @return mixed
      */

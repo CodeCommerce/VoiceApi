@@ -8,6 +8,7 @@ use CodeCommerce\AlexaApi\Model\Intent;
 use CodeCommerce\AlexaApi\Model\Outspeech;
 use CodeCommerce\AlexaApi\Model\Request;
 use CodeCommerce\AlexaApi\Model\Response;
+use CodeCommerce\AlexaApi\Model\ResponseBody;
 
 class TestIntent implements IntentsInterface
 {
@@ -21,17 +22,20 @@ class TestIntent implements IntentsInterface
     public function runIntent()
     {
         $response = new Response();
-        $response->setVersion('1.0')
-            ->setOutputSpeech($this->getTestOutspeech());
+        $response->setOutputSpeech($this->getTestOutspeech());
 
-        $responsehandler = new ResponseHandler();
-        $responsehandler->sendResponse($response);
+        $responseBody = new ResponseBody();
+        $responseBody->setResponse($response);
+
+        $responseHandler = new ResponseHandler();
+        $responseHandler->sendResponse($responseBody);
     }
 
     protected function getTestOutspeech()
     {
-        $outspeech = new Outspeech();
-        $outspeech->setText('Wir testen eine Ausgabe');
-        return $outspeech;
+        $outSpeech = new Outspeech();
+        $outSpeech->setText('Wir testen eine Ausgabe');
+
+        return $outSpeech;
     }
 }
