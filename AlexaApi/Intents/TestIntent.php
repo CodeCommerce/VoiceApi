@@ -22,7 +22,7 @@ class TestIntent implements IntentsInterface
     public function runIntent()
     {
         $response = new Response();
-        $response->setOutputSpeech($this->getTestOutspeech());
+        $response->setOutputSpeech($this->getTestOutSpeech());
 
         $responseBody = new ResponseBody();
         $responseBody->setResponse($response);
@@ -31,7 +31,7 @@ class TestIntent implements IntentsInterface
         $responseHandler->sendResponse($responseBody);
     }
 
-    protected function getTestOutspeech()
+    protected function getTestOutSpeech()
     {
         $outSpeech = new Outspeech();
         $outSpeech->setText('Wir testen eine Ausgabe');
