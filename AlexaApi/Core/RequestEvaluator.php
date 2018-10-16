@@ -8,7 +8,7 @@ use CodeCommerce\AlexaApi\Model\Intent;
  * Class Request
  * @package CodeCommerce\AlexaApi\Core
  */
-class Request
+class RequestEvaluator
 {
     /**
      * @var object
