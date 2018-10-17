@@ -50,7 +50,7 @@ class TestIntent implements IntentsInterface
     protected function getTestOutSpeech()
     {
         $outSpeech = new Outspeech();
-        $outSpeech->setText('Wir testen eine Ausgabe');
+        $outSpeech->setText('Hallo Herr Mustermann - wie geht es ihnen');
 
         return $outSpeech;
     }
