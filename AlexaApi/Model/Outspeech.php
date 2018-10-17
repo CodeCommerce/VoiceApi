@@ -6,34 +6,42 @@ namespace CodeCommerce\AlexaApi\Model;
  * Class Outspeech
  * @package CodeCommerce\AlexaApi\Model
  */
+/**
+ * Class Outspeech
+ * @package CodeCommerce\AlexaApi\Model
+ */
 class Outspeech
 {
     const PLAY_BEHAVIOR_ENQUEUE = 'ENQUEUE';
     const PLAY_BEHAVIOR_REPLACE_ALL = 'REPLACE_ALL';
     const PLAY_BEHAVIOR_REPLACE_ENQUEUED = 'REPLACE_ENQUEUED';
+
     const TYPE_PLAIN_TEXT = 'PlainText';
     const TYPE_SSML = 'SSML';
 
     /**
-     * @var
+     * @var string
      */
     protected $type;
 
     /**
-     * @var
+     * @var string
      */
     protected $text;
 
     /**
-     * @var
+     * @var \stdClass
      */
     protected $ssml;
 
     /**
-     * @var
+     * @var string
      */
     protected $playBehavior;
 
+    /**
+     * Outspeech constructor.
+     */
     public function __construct()
     {
         $this->setType(self::TYPE_PLAIN_TEXT);

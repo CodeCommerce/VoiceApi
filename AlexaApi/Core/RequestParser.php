@@ -8,7 +8,7 @@ use CodeCommerce\AlexaApi\Model\Intent;
  * Class Request
  * @package CodeCommerce\AlexaApi\Core
  */
-class RequestEvaluator
+class RequestParser
 {
     /**
      * @var object
@@ -43,7 +43,7 @@ class RequestEvaluator
     {
         $this->_request = new \CodeCommerce\AlexaApi\Model\Request();
         $this->_request->setLocale($this->_jsonObject->locale)
-            ->setRequestid($this->_jsonObject->requestId)
+            ->setRequestId($this->_jsonObject->requestId)
             ->setTimestamp($this->_jsonObject->timestamp)
             ->setType($this->_jsonObject->type)
             ->setIntent($this->getIntent());
@@ -71,6 +71,9 @@ class RequestEvaluator
         return false;
     }
 
+    /**
+     * @return \CodeCommerce\AlexaApi\Model\Request
+     */
     public function getRequest()
     {
         return $this->_request;

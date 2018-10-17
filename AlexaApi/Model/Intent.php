@@ -2,9 +2,19 @@
 
 namespace CodeCommerce\AlexaApi\Model;
 
+/**
+ * Class Intent
+ * @package CodeCommerce\AlexaApi\Model
+ */
 class Intent
 {
+    /**
+     * @var
+     */
     protected $name;
+    /**
+     * @var
+     */
     protected $confirmationStatus;
 
     /**

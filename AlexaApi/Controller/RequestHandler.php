@@ -2,25 +2,43 @@
 
 namespace CodeCommerce\AlexaApi\Controller;
 
-use CodeCommerce\AlexaApi\Core\RequestEvaluator;
+use CodeCommerce\AlexaApi\Core\RequestParser;
 use CodeCommerce\AlexaApi\Core\RequestRouter;
+use CodeCommerce\AlexaApi\Model\Intent;
 
+/**
+ * Class RequestHandler
+ * @package CodeCommerce\AlexaApi\Controller
+ */
 class RequestHandler
 {
+    /**
+     * @var object
+     */
     protected $_jsonObject;
 
-    protected $_requestEvaluator;
+    /**
+     * @var RequestParser
+     */
+    protected $_requestParser;
 
+    /**
+     * @var Intent
+     */
     protected $_intent;
 
+    /**
+     * RequestHandler constructor.
+     * @param $jsonObject
+     */
     public function __construct($jsonObject)
     {
         $this->_jsonObject = $jsonObject;
 
         try {
             if ($this->checkRequest()) {
-                $this->setRequestEvaluator($this->_jsonObject->request);
-                $this->setIntent($this->getRequestEvaluator()->getIntent());
+                $this->setRequestParser($this->_jsonObject->request);
+                $this->setIntent($this->getRequestParser()->getIntent());
             }
             $this->doRequest();
         } catch (\Exception $exception) {
@@ -28,26 +46,42 @@ class RequestHandler
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function getIntent()
     {
         return $this->_intent;
     }
 
+    /**
+     * @param $oIntent
+     */
     public function setIntent($oIntent)
     {
         $this->_intent = $oIntent;
     }
 
-    public function getRequestEvaluator()
+    /**
+     * @return mixed
+     */
+    public function getRequestParser()
     {
-        return $this->_requestEvaluator;
+        return $this->_requestParser;
     }
 
-    public function setRequestEvaluator($oRequest)
+    /**
+     * @param $oRequest
+     */
+    public function setRequestParser($oRequest)
     {
-        $this->_requestEvaluator = new RequestEvaluator($oRequest);
+        $this->_requestParser = new RequestParser($oRequest);
     }
 
+    /**
+     * @return bool
+     * @throws \Exception
+     */
     protected function checkRequest()
     {
         if (!property_exists($this->_jsonObject, 'request')) {
@@ -63,7 +97,7 @@ class RequestHandler
         $intentClass = $router->getRoute($this->getIntent()->getName());
 
         if (class_exists($intentClass)) {
-            $intent = new $intentClass($this->getRequestEvaluator()->getRequest());
+            $intent = new $intentClass($this->getRequestParser()->getRequest());
             $intent->runIntent();
         }
     }

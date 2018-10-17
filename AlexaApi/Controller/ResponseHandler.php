@@ -5,8 +5,15 @@ namespace CodeCommerce\AlexaApi\Controller;
 use CodeCommerce\AlexaApi\Core\ResponseFormatter;
 use CodeCommerce\AlexaApi\Model\ResponseBody;
 
+/**
+ * Class ResponseHandler
+ * @package CodeCommerce\AlexaApi\Controller
+ */
 class ResponseHandler
 {
+    /**
+     * @param ResponseBody $responseBody
+     */
     public function sendResponse(ResponseBody $responseBody)
     {
         $this->addHeader();

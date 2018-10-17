@@ -2,11 +2,24 @@
 
 namespace CodeCommerce\AlexaApi\Model;
 
+/**
+ * Class ResponseBody
+ * @package CodeCommerce\AlexaApi\Model
+ */
 class ResponseBody
 {
+    /**
+     * @var string
+     */
     protected $version;
+    /**
+     * @var object
+     */
     protected $response;
 
+    /**
+     * ResponseBody constructor.
+     */
     public function __construct()
     {
         $this->setVersion('1.0');

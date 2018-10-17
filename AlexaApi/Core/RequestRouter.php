@@ -2,33 +2,32 @@
 
 namespace CodeCommerce\AlexaApi\Core;
 
-
 use Symfony\Component\Yaml\Yaml;
 
+/**
+ * Class RequestRouter
+ * @package CodeCommerce\AlexaApi\Core
+ */
 class RequestRouter
 {
-    protected $_aRoutes;
     const ROUTING_FILE_PATH = '/../Config/routes.yml';
+    /**
+     * @var array
+     */
+    protected $_aRoutes;
 
+    /**
+     * RequestRouter constructor.
+     */
     public function __construct()
     {
         $this->setRoutes();
     }
 
-    protected function setRoutes()
-    {
-        $this->_aRoutes = Yaml::parseFile(__DIR__ . self::ROUTING_FILE_PATH);
-    }
-
-    protected function getRoutes()
-    {
-        if (null === $this->_aRoutes) {
-            $this->setRoutes();
-        }
-
-        return $this->_aRoutes;
-    }
-
+    /**
+     * @param $sIntentName
+     * @return bool
+     */
     public function getRoute($sIntentName)
     {
         if (array_key_exists($sIntentName, $this->getRoutes())) {
@@ -38,5 +37,22 @@ class RequestRouter
         }
 
         return false;
+    }
+
+    protected function setRoutes()
+    {
+        $this->_aRoutes = Yaml::parseFile(__DIR__ . self::ROUTING_FILE_PATH);
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getRoutes()
+    {
+        if (null === $this->_aRoutes) {
+            $this->setRoutes();
+        }
+
+        return $this->_aRoutes;
     }
 }

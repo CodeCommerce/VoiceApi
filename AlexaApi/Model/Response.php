@@ -9,7 +9,7 @@ namespace CodeCommerce\AlexaApi\Model;
 class Response
 {
     /**
-     * @var
+     * @var Outspeech
      */
     protected $outputSpeech;
 
@@ -19,7 +19,7 @@ class Response
     protected $reprompt;
 
     /**
-     * @var
+     * @var bool
      */
     protected $shouldEndSession;
 

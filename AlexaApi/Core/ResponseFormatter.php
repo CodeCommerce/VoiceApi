@@ -7,25 +7,47 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
+/**
+ * Class ResponseFormatter
+ * @package CodeCommerce\AlexaApi\Core
+ */
 class ResponseFormatter
 {
+    /**
+     * @var bool|float|int|string
+     */
     protected $formattedResponse;
 
+    /**
+     * ResponseFormatter constructor.
+     * @param ResponseBody $responseBody
+     */
     public function __construct(ResponseBody $responseBody)
     {
         $this->formattedResponse = $this->formatResponse($responseBody);
     }
 
+    /**
+     * @return bool|float|int|string
+     */
     public function getFormattedResponse()
     {
         return $this->formattedResponse;
     }
 
+    /**
+     * @param ResponseBody $responseBody
+     * @return bool|float|int|string
+     */
     protected function formatResponse(ResponseBody $responseBody)
     {
         return $this->serializeResponse($responseBody);
     }
 
+    /**
+     * @param $responseBody
+     * @return bool|float|int|string
+     */
     protected function serializeResponse($responseBody)
     {
         $encoder = [new JsonEncoder()];

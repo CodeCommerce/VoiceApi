@@ -2,10 +2,14 @@
 
 namespace CodeCommerce\AlexaApi\Model;
 
+/**
+ * Class Request
+ * @package CodeCommerce\AlexaApi\Model
+ */
 class Request
 {
     protected $type;
-    protected $requestid;
+    protected $requestId;
     protected $timestamp;
     protected $locale;
     protected $intent;
@@ -32,18 +36,18 @@ class Request
     /**
      * @return mixed
      */
-    public function getRequestid()
+    public function getRequestId()
     {
-        return $this->requestid;
+        return $this->requestId;
     }
 
     /**
-     * @param mixed $requestid
+     * @param mixed $requestId
      * @return Request
      */
-    public function setRequestid($requestid)
+    public function setRequestId($requestId)
     {
-        $this->requestid = $requestid;
+        $this->requestId = $requestId;
 
         return $this;
     }
