@@ -65,7 +65,7 @@ class TestIntent implements IntentsInterface
         $template = new Template();
         $template->setType($template::BODY_TEMPLATE_1_SIMPLE_TEXT_IMAGES)
             ->setBackButton($template::BACK_BUTTON_VISIBLE)
-            ->setBackgroundImage('https://www.codecommerce.de/wp-content/uploads/2018/04/18403105_1372829509477095_2872277146168686090_n-220x220.jpg')
+            ->setBackgroundImage('https://www.designguide.at/fileadmin/_migrated/pics/Logo_-_Porsche2.jpg')
             ->setTitle('Testtitel');
 
 

@@ -41,7 +41,10 @@ class ResponseFormatter
      */
     protected function formatResponse(ResponseBody $responseBody)
     {
-        return $this->serializeResponse($responseBody);
+        $json = $this->serializeResponse($responseBody);
+        $json = str_replace("\/", "/", $json);
+
+        return $json;
     }
 
     /**
