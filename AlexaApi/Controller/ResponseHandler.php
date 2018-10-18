@@ -17,8 +17,6 @@ class ResponseHandler
     public function sendResponse(ResponseBody $responseBody)
     {
         $this->addHeader();
-        echo file_get_contents('../../AlexaRequests/response.json');
-        die();
         $responseFormatter = new ResponseFormatter($responseBody);
         echo $responseFormatter->getFormattedResponse();
     }
