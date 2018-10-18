@@ -63,10 +63,13 @@ class TestIntent implements IntentsInterface
      */
     protected function getTestDirective()
     {
+        $backgroundimage = new BackgroundImage();
+        $backgroundimage->setSources('https://www.designguide.at/fileadmin/_migrated/pics/Logo_-_Porsche2.jpg')
+            ->setContentDescription('TestDesc');
         $template = new Template();
         $template->setType($template::BODY_TEMPLATE_1_SIMPLE_TEXT_IMAGES)
             ->setBackButton($template::BACK_BUTTON_VISIBLE)
-//            ->setBackgroundImage($backgroundimage)
+            ->setBackgroundImage($backgroundimage)
             ->setTitle('Testtitel');
 
 
