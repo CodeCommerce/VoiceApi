@@ -68,10 +68,11 @@ class TestIntent implements IntentsInterface
             ->setContentDescription('TestDesc');
 
         $template = new Template();
-        $template->setType($template::BODY_TEMPLATE_1_SIMPLE_TEXT_IMAGES)
+        $template->setType($template::BODY_TEMPLATE_2_IMAGE_LIMITED_CENTERED_TEXT)
             ->setBackButton($template::BACK_BUTTON_VISIBLE)
             ->setBackgroundImage($backgroundImage)
-            ->setTitle('Testtitel');
+            ->setTitle('Testtitel')
+            ->setPrimary('Testing Primary');
 
 
         $directive = new Directives();

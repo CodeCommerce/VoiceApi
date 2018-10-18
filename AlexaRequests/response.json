@@ -5,12 +5,24 @@
       {
         "type": "Display.RenderTemplate",
         "template": {
-          "type": "BodyTemplate1",
+          "type": "BodyTemplate2",
           "token": null,
           "backButton": "VISIBLE",
-          "backgroundImage": "https://www.designguide.at/fileadmin/_migrated/pics/Logo_-_Porsche2.jpg",
+          "backgroundImage": {
+            "contentDescription": "TestDesc",
+            "sources": [
+              {
+                "url": "https://www.codecommerce.de/wp-content/uploads/2018/04/18403105_1372829509477095_2872277146168686090_n-316x316.jpg"
+              }
+            ]
+          },
           "title": "Testtitel",
-          "textContent": null
+          "textContent": {
+            "primaryText": {
+              "text": "Testing Primary",
+              "type": "PlainText"
+            }
+          }
         }
       }
     ],

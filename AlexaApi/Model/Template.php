@@ -9,7 +9,7 @@ class Template
     protected $backButton;
     protected $backgroundImage;
     protected $title;
-    protected $textContent;
+    protected $textContent = [];
 
     const BODY_TEMPLATE_1_SIMPLE_TEXT_IMAGES = 'BodyTemplate1';
     const BODY_TEMPLATE_2_IMAGE_LIMITED_CENTERED_TEXT = 'BodyTemplate2';
@@ -145,10 +145,12 @@ class Template
      */
     public function setPrimaryText($text)
     {
-        if (!property_exists($this->textContent, 'primaryText')) {
-            $this->textContent->primaryText = new \stdClass();
-        }
-        $this->textContent->primaryText->text = $text;
+//        if (!property_exists($this->textContent, 'primaryText')) {
+//            $this->textContent->primaryText = new \stdClass();
+//        }
+//        $this->textContent->primaryText->text = $text;
+
+        $this->textContent['primaryText']['text'] = $text;
 
         return $this;
     }
@@ -159,10 +161,12 @@ class Template
      */
     public function setPrimaryType($type)
     {
-        if (!property_exists($this->textContent, 'primaryText')) {
-            $this->textContent->primaryText = new \stdClass();
-        }
-        $this->textContent->primaryText->type = $type;
+//        if (!property_exists($this->textContent, 'primaryText')) {
+//            $this->textContent->primaryText = new \stdClass();
+//        }
+//        $this->textContent->primaryText->type = $type;
+
+        $this->textContent['primaryText']['type'] = $type;
 
         return $this;
     }
