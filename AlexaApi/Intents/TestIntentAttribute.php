@@ -70,11 +70,17 @@ class TestIntentAttribute implements IntentsInterface
      */
     protected function getDinFormat($sFormat)
     {
-        switch ($sFormat) {
-            case 'dina4':
-                return "40cm mal 40cm";
-            case 'dina3':
-                return "30cm mal 30cm";
+        $iSize = (int)str_replace('dina', '', $sFormat);
+        if ($iSize > 0) {
+            $width = 1.189;
+            $height = 0.841;
+
+            for ($i = 1; $i - 1 < $iSize; $i++) {
+                $width = round($width / (sqrt(2)), 5, PHP_ROUND_HALF_UP);
+                $height = round($height / (sqrt(2)), 5, PHP_ROUND_HALF_UP);
+            }
+
+            return round(($height * 1000), 0) . "mm mal " . round(($width * 1000), 0) . "mm";
         }
 
         return false;
