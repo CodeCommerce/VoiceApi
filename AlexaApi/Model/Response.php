@@ -24,6 +24,29 @@ class Response
     protected $shouldEndSession;
 
     /**
+     * @var Directives
+     */
+    protected $directives;
+
+    /**
+     * @return mixed
+     */
+    public function getDirectives()
+    {
+        return $this->directives;
+    }
+
+    /**
+     * @param mixed $directives
+     */
+    public function setDirectives($directives)
+    {
+        $this->directives = $directives;
+
+        return $this;
+    }
+
+    /**
      * @return mixed
      */
     public function getOutputSpeech()
@@ -80,6 +103,9 @@ class Response
         return $this;
     }
 
+    /**
+     * @param $name
+     */
     public function unsetVariable($name)
     {
         if (property_exists($this, $name)) {
