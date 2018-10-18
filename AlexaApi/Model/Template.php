@@ -9,18 +9,21 @@ class Template
     protected $backButton;
     protected $backgroundImage;
     protected $title;
-    protected $textContent;
+//    protected $textContent;
 
     const BODY_TEMPLATE_1_SIMPLE_TEXT_IMAGES = 'BodyTemplate1';
     const BODY_TEMPLATE_2_IMAGE_LIMITED_CENTERED_TEXT = 'BodyTemplate2';
     const BODY_TEMPLATE_3_IMAGE_LIMITED_LEFT_ALIGNED_TEXT = 'BodyTemplate3';
     const BODY_TEMPLATE_6_TEXT_OPTIONAL_BACKGROUND_IMAGE = 'BodyTemplate6';
     const BODY_TEMPLATE_7_SCALABLE_FOREGROUND_IMAGE_OPTIONAL_BACKGROUND_IMAGE = 'BodyTemplate7';
+
     const LIST_TEMPLATE_1_TEXT_LISTS_OPTIONAL_IMAGES = 'ListTemplate1';
     const LIST_TEMPLATE_2_IMAGES_LISTS_OPTIONAL_TEXT = 'ListTemplate2';
 
     const BACKBUTTON_VISIBLE = 'VISIBLE';
     const BACKBUTTON_HIDDEN = 'HIDDEN';
+
+    const TEXT_TYPE_PLAINTEXT = 'PlainText';
 
     /**
      * @return mixed
@@ -32,6 +35,7 @@ class Template
 
     /**
      * @param mixed $type
+     * @return Template
      */
     public function setType($type)
     {
@@ -68,6 +72,7 @@ class Template
 
     /**
      * @param mixed $backButton
+     * @return Template
      */
     public function setBackButton($backButton)
     {
@@ -86,6 +91,7 @@ class Template
 
     /**
      * @param mixed $backgroundImage
+     * @return Template
      */
     public function setBackgroundImage($backgroundImage)
     {
@@ -104,6 +110,7 @@ class Template
 
     /**
      * @param mixed $title
+     * @return Template
      */
     public function setTitle($title)
     {
@@ -112,23 +119,24 @@ class Template
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getTextContent()
-    {
-        return $this->textContent;
-    }
+//    /**
+//     * @return mixed
+//     */
+//    public function getTextContent()
+//    {
+//        return $this->textContent;
+//    }
 
-    /**
-     * @param mixed $textContent
-     */
-    public function setTextContent($textContent)
-    {
-        $this->textContent = $textContent;
-
-        return $this;
-    }
+//    /**
+//     * @param mixed $textContent
+//     * @return Template
+//     */
+//    public function setTextContent($textContent)
+//    {
+//        $this->textContent = $textContent;
+//
+//        return $this;
+//    }
 
     /**
      * @param $text
@@ -136,6 +144,9 @@ class Template
      */
     public function setPrimaryText($text)
     {
+        if (!property_exists($this->textContent, 'primaryText')) {
+            $this->textContent->primaryText = new \stdClass();
+        }
         $this->textContent->primaryText->text = $text;
 
         return $this;
@@ -147,6 +158,9 @@ class Template
      */
     public function setPrimaryType($type)
     {
+        if (!property_exists($this->textContent, 'primaryText')) {
+            $this->textContent->primaryText = new \stdClass();
+        }
         $this->textContent->primaryText->type = $type;
 
         return $this;
@@ -157,7 +171,7 @@ class Template
      * @param $type
      * @return Template
      */
-    public function setPrimary($text, $type)
+    public function setPrimary($text, $type = self::TEXT_TYPE_PLAINTEXT)
     {
         $this->setPrimaryText($text);
         $this->setPrimaryType($type);
@@ -171,7 +185,10 @@ class Template
      */
     public function setSecondaryText($text)
     {
-        $this->textContent->secondary->text = $text;
+        if (!property_exists($this->textContent, 'secondaryText')) {
+            $this->textContent->secondaryText = new \stdClass();
+        }
+        $this->textContent->secondaryText->text = $text;
 
         return $this;
     }
@@ -182,7 +199,10 @@ class Template
      */
     public function setSecondaryType($type)
     {
-        $this->textContent->secondary->type = $type;
+        if (!property_exists($this->textContent, 'secondaryText')) {
+            $this->textContent->secondaryText = new \stdClass();
+        }
+        $this->textContent->secondaryText->type = $type;
 
         return $this;
     }
@@ -192,7 +212,7 @@ class Template
      * @param $type
      * @return Template
      */
-    public function setSecondary($text, $type)
+    public function setSecondary($text, $type = self::TEXT_TYPE_PLAINTEXT)
     {
         $this->setPrimaryText($text);
         $this->setPrimaryType($type);
@@ -206,7 +226,10 @@ class Template
      */
     public function setTertiaryText($text)
     {
-        $this->textContent->tertiary->text = $text;
+        if (!property_exists($this->textContent, 'tertiaryText')) {
+            $this->textContent->tertiaryText = new \stdClass();
+        }
+        $this->textContent->tertiaryText->text = $text;
 
         return $this;
     }
@@ -217,7 +240,10 @@ class Template
      */
     public function setTertiaryType($type)
     {
-        $this->textContent->tertiary->type = $type;
+        if (!property_exists($this->textContent, 'tertiaryText')) {
+            $this->textContent->tertiaryText = new \stdClass();
+        }
+        $this->textContent->tertiaryText->type = $type;
 
         return $this;
     }
@@ -227,7 +253,7 @@ class Template
      * @param $type
      * @return Template
      */
-    public function setTertiary($text, $type)
+    public function setTertiary($text, $type = self::TEXT_TYPE_PLAINTEXT)
     {
         $this->setPrimaryText($text);
         $this->setPrimaryType($type);
