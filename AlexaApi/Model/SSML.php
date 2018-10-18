@@ -57,7 +57,13 @@ class SSML
      */
     public function getText()
     {
-        return "<speak>" . implode(" " . $this->output) . "</speak>";
+        $output = "<speak>";
+        foreach ($this->output as $text) {
+            $output .= $text . " ";
+        }
+        $output .= "</speak>";
+
+        return $output;
     }
 
     /**

@@ -1,8 +1,11 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
-// LIVE
-$json = json_decode(file_get_contents('php://input'));
+$bIsDev = false;
 
-// TEST
-//$json = json_decode(file_get_contents(__DIR__ . '/../AlexaRequests/StandardRequestSlots.json'));
+if ($bIsDev) {
+    $json = json_decode(file_get_contents(__DIR__ . '/../AlexaRequests/StandardRequestSlots.json'));
+} else {
+    $json = json_decode(file_get_contents('php://input'));
+}
+
 $request = new CodeCommerce\AlexaApi\Controller\RequestHandler($json);

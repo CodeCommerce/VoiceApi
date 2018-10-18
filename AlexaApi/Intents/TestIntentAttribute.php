@@ -68,7 +68,7 @@ class TestIntentAttribute implements IntentsInterface
         }
         $SSML->addText("Das Format hat eine Größe von ");
         $SSML->addWhisper($sAnswer);
-        $outSpeech->setSsml($SSML);
+        $outSpeech->setSsml($SSML->getText());
 
         return $outSpeech;
     }
