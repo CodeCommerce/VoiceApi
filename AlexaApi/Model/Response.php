@@ -26,7 +26,7 @@ class Response
     /**
      * @var Directives
      */
-    protected $directives;
+    protected $directives = [];
 
     /**
      * @return mixed
@@ -38,10 +38,11 @@ class Response
 
     /**
      * @param mixed $directives
+     * @return Response
      */
     public function setDirectives($directives)
     {
-        $this->directives = $directives;
+        $this->directives[] = $directives;
 
         return $this;
     }
