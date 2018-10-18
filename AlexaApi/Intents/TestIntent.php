@@ -72,7 +72,9 @@ class TestIntent implements IntentsInterface
             ->setBackButton($template::BACK_BUTTON_VISIBLE)
             ->setBackgroundImage($backgroundImage)
             ->setTitle('Testtitel')
-            ->setPrimary('Testing Primary');
+            ->setPrimary('Testing Primary')
+            ->setSecondary('Secondary TEsting')
+            ->setTertiary('woar we got it!');
 
 
         $directive = new Directives();

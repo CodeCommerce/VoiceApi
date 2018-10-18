@@ -145,11 +145,6 @@ class Template
      */
     public function setPrimaryText($text)
     {
-//        if (!property_exists($this->textContent, 'primaryText')) {
-//            $this->textContent->primaryText = new \stdClass();
-//        }
-//        $this->textContent->primaryText->text = $text;
-
         $this->textContent['primaryText']['text'] = $text;
 
         return $this;
@@ -161,11 +156,6 @@ class Template
      */
     public function setPrimaryType($type)
     {
-//        if (!property_exists($this->textContent, 'primaryText')) {
-//            $this->textContent->primaryText = new \stdClass();
-//        }
-//        $this->textContent->primaryText->type = $type;
-
         $this->textContent['primaryText']['type'] = $type;
 
         return $this;
@@ -190,10 +180,7 @@ class Template
      */
     public function setSecondaryText($text)
     {
-        if (!property_exists($this->textContent, 'secondaryText')) {
-            $this->textContent->secondaryText = new \stdClass();
-        }
-        $this->textContent->secondaryText->text = $text;
+        $this->textContent['secondaryText']['text'] = $text;
 
         return $this;
     }
@@ -204,10 +191,7 @@ class Template
      */
     public function setSecondaryType($type)
     {
-        if (!property_exists($this->textContent, 'secondaryText')) {
-            $this->textContent->secondaryText = new \stdClass();
-        }
-        $this->textContent->secondaryText->type = $type;
+        $this->textContent['secondaryText']['type'] = $type;
 
         return $this;
     }
@@ -231,10 +215,7 @@ class Template
      */
     public function setTertiaryText($text)
     {
-        if (!property_exists($this->textContent, 'tertiaryText')) {
-            $this->textContent->tertiaryText = new \stdClass();
-        }
-        $this->textContent->tertiaryText->text = $text;
+        $this->textContent['tertiaryText']['type'] = $text;
 
         return $this;
     }
@@ -245,10 +226,7 @@ class Template
      */
     public function setTertiaryType($type)
     {
-        if (!property_exists($this->textContent, 'tertiaryText')) {
-            $this->textContent->tertiaryText = new \stdClass();
-        }
-        $this->textContent->tertiaryText->type = $type;
+        $this->textContent['tertiaryText']['type'] = $type;
 
         return $this;
     }
