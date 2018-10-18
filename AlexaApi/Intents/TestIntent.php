@@ -36,7 +36,7 @@ class TestIntent implements IntentsInterface
     public function runIntent()
     {
         $response = new Response();
-        $response->setOutputSpeech($this->getTestOutSpeech());
+//        $response->setOutputSpeech($this->getTestOutSpeech());
         $response->setDirectives($this->getTestDirective());
 
         $responseBody = new ResponseBody();
