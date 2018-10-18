@@ -9,7 +9,7 @@ class Template
     protected $backButton;
     protected $backgroundImage;
     protected $title;
-//    protected $textContent;
+    protected $textContent;
 
     const BODY_TEMPLATE_1_SIMPLE_TEXT_IMAGES = 'BodyTemplate1';
     const BODY_TEMPLATE_2_IMAGE_LIMITED_CENTERED_TEXT = 'BodyTemplate2';
@@ -119,24 +119,24 @@ class Template
         return $this;
     }
 
-//    /**
-//     * @return mixed
-//     */
-//    public function getTextContent()
-//    {
-//        return $this->textContent;
-//    }
+    /**
+     * @return mixed
+     */
+    public function getTextContent()
+    {
+        return $this->textContent;
+    }
 
-//    /**
-//     * @param mixed $textContent
-//     * @return Template
-//     */
-//    public function setTextContent($textContent)
-//    {
-//        $this->textContent = $textContent;
-//
-//        return $this;
-//    }
+    /**
+     * @param mixed $textContent
+     * @return Template
+     */
+    public function setTextContent($textContent)
+    {
+        $this->textContent = $textContent;
+
+        return $this;
+    }
 
     /**
      * @param $text
