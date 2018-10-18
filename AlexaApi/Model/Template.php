@@ -20,8 +20,8 @@ class Template
     const LIST_TEMPLATE_1_TEXT_LISTS_OPTIONAL_IMAGES = 'ListTemplate1';
     const LIST_TEMPLATE_2_IMAGES_LISTS_OPTIONAL_TEXT = 'ListTemplate2';
 
-    const BACKBUTTON_VISIBLE = 'VISIBLE';
-    const BACKBUTTON_HIDDEN = 'HIDDEN';
+    const BACK_BUTTON_VISIBLE = 'VISIBLE';
+    const BACK_BUTTON_HIDDEN = 'HIDDEN';
 
     const TEXT_TYPE_PLAINTEXT = 'PlainText';
 
@@ -54,6 +54,7 @@ class Template
 
     /**
      * @param mixed $token
+     * @return Template
      */
     public function setToken($token)
     {
