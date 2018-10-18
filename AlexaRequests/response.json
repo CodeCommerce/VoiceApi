@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "response": {
+    "directives": [
+      {
+        "type": "Display.RenderTemplate",
+        "template": {
+          "type": "BodyTemplate1",
+          "token": "CheeseFactView",
+          "backButton": "HIDDEN",
+          "title": "Did You Know?",
+          "textContent": {
+            "primaryText": {
+              "type": "RichText",
+              "text": "The world’s stinkiest cheese is from Northern France"
+            }
+          }
+        }
+      }
+    ]
+  }
+}
