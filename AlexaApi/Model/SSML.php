@@ -8,48 +8,44 @@ namespace CodeCommerce\AlexaApi\Model;
  */
 class SSML
 {
-    /**
-     *
-     */
     const AMAZON_EFFECT_WHISPER = 'whispered';
 
-    /**
-     *
-     */
     const BREAK_STRENGTH_NONE = 'none';
-    /**
-     *
-     */
     const BREAK_STRENGTH_EXTRA_WEEK = 'x-weak';
-    /**
-     *
-     */
     const BREAK_STRENGTH_WEEK = 'weak';
-    /**
-     *
-     */
     const BREAK_STRENGTH_MEDIUM = 'medium';
-    /**
-     *
-     */
     const BREAK_STRENGTH_STRONG = 'strong';
-    /**
-     *
-     */
     const BREAK_STRENGTH_EXTRA_STRONG = 'x-strong';
 
-    /**
-     *
-     */
     const EMPHASIS_LEVEL_STRONG = 'strong';
-    /**
-     *
-     */
     const EMPHASIS_LEVEL_MODERATE = 'moderate';
-    /**
-     *
-     */
     const EMPHASIS_LEVEL_REDUCED = 'reduced';
+
+    const INTERPRET_AS_CHARACTERS = 'characters';
+    const INTERPRET_AS_SPELL_OUT = 'spell-out';
+    const INTERPRET_AS_CARDINAL = 'cardinal';
+    const INTERPRET_AS_NUMBER = 'number';
+    const INTERPRET_AS_ORDINAL = 'ordinal';
+    const INTERPRET_AS_FRACTION = 'fraction';
+    const INTERPRET_AS_UNIT = 'unit';
+    const INTERPRET_AS_DIGITS = 'digits';
+    const INTERPRET_AS_DATE = 'date';
+    const INTERPRET_AS_TIME = 'time';
+    const INTERPRET_AS_TELEPHONE = 'telephone';
+    const INTERPRET_AS_ADDRESS = 'address';
+    const INTERPRET_AS_INTERJECTION = 'interjection';
+    const INTERPRET_AS_EXPLETIVE = 'expletive';
+
+    const DATEFORMAT_MONTH_DAY_YEAR = 'mdy';
+    const DATEFORMAT_DAY_MONTH_YEAR = 'dmy';
+    const DATEFORMAT_YEAR_MONTH_DAY = 'ymd';
+    const DATEFORMAT_MONTH_DAY = 'md';
+    const DATEFORMAT_DAY_MONTH = 'dm';
+    const DATEFORMAT_YEAR_MONTH = 'ym';
+    const DATEFORMAT_MONTH_YEAR = 'my';
+    const DATEFORMAT_DAY = 'd';
+    const DATEFORMAT_MONTH = 'm';
+    const DATEFORMAT_YEAR = 'y';
 
     /**
      * @var array
@@ -196,5 +192,61 @@ class SSML
     public function addText($text)
     {
         $this->addOutput($text);
+    }
+
+    /**
+     * @param      $text
+     * @param      $interpretAs
+     * @param null $format
+     * @return $this
+     */
+    public function addTextAs($text, $interpretAs, $format = null)
+    {
+        $output = "<say-as interpret-as='" . $interpretAs . "'";
+
+        if (null !== $format) {
+            $output .= " format='" . $format . "'";
+        }
+
+        $output .= ">";
+        $output .= $text;
+        $output .= "</say-as>";
+        $this->addOutput($output);
+
+        return $this;
+    }
+
+    /**
+     * @param        $date
+     * @param string $format
+     * @return $this
+     */
+    public function addDate($date, $format = self::DATEFORMAT_DAY_MONTH_YEAR)
+    {
+        $this->addTextAs($date, self::INTERPRET_AS_DATE, $format);
+
+        return $this;
+    }
+
+    /**
+     * @param $phone
+     * @return $this
+     */
+    public function addTelephoneNumer($phone)
+    {
+        $this->addTextAs($phone, self::INTERPRET_AS_TELEPHONE);
+
+        return $this;
+    }
+
+    /**
+     * @param $number
+     * @return $this
+     */
+    public function addNumber($number)
+    {
+        $this->addTextAs($number, self::INTERPRET_AS_NUMBER);
+
+        return $this;
     }
 }
