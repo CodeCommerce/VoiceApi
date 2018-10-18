@@ -203,8 +203,8 @@ class Template
      */
     public function setSecondary($text, $type = self::TEXT_TYPE_PLAINTEXT)
     {
-        $this->setPrimaryText($text);
-        $this->setPrimaryType($type);
+        $this->setSecondaryText($text);
+        $this->setSecondaryType($type);
 
         return $this;
     }
