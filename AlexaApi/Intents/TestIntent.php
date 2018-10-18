@@ -3,6 +3,7 @@
 namespace CodeCommerce\AlexaApi\Intents;
 
 use CodeCommerce\AlexaApi\Controller\ResponseHandler;
+use CodeCommerce\AlexaApi\Model\BackgroundImage;
 use CodeCommerce\AlexaApi\Model\Directives;
 use CodeCommerce\AlexaApi\Model\Outspeech;
 use CodeCommerce\AlexaApi\Model\Request;
@@ -65,12 +66,13 @@ class TestIntent implements IntentsInterface
         $template = new Template();
         $template->setType($template::BODY_TEMPLATE_1_SIMPLE_TEXT_IMAGES)
             ->setBackButton($template::BACK_BUTTON_VISIBLE)
-            ->setBackgroundImage('https://www.designguide.at/fileadmin/_migrated/pics/Logo_-_Porsche2.jpg')
+//            ->setBackgroundImage($backgroundimage)
             ->setTitle('Testtitel');
 
 
         $directive = new Directives();
         $directive->setTemplate($template);
+
         return $directive;
     }
 }
