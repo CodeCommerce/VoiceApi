@@ -7,6 +7,7 @@ use CodeCommerce\AlexaApi\Model\Outspeech;
 use CodeCommerce\AlexaApi\Model\Request;
 use CodeCommerce\AlexaApi\Model\Response;
 use CodeCommerce\AlexaApi\Model\ResponseBody;
+use CodeCommerce\AlexaApi\Model\SSML;
 
 /**
  * Class TestIntentAttribute
@@ -57,11 +58,19 @@ class TestIntentAttribute implements IntentsInterface
     protected function getDinFormatOutspeech($sAnswer)
     {
         $outSpeech = new Outspeech();
+        $outSpeech->setType(Outspeech::TYPE_SSML);
+        $SSML = new SSML();
         if (!$sAnswer) {
-            return $outSpeech->setText("Es tut mir sehr leid, wir finden das angegebene Format nicht.");
-        }
+            $SSML->addText("Es tut mir sehr leid, wir finden das angegebene Format nicht.");
+            $outSpeech->setSsml($SSML);
 
-        return $outSpeech->setText("Das Format hat eine Größe von " . $sAnswer);
+            return $outSpeech;
+        }
+        $SSML->addText("Das Format hat eine Größe von ");
+        $SSML->addWhisper($sAnswer);
+        $outSpeech->setSsml($SSML);
+
+        return $outSpeech;
     }
 
     /**
