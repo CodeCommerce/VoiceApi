@@ -3,7 +3,6 @@
 namespace CodeCommerce\AlexaApi\Intents;
 
 use CodeCommerce\AlexaApi\Controller\ResponseHandler;
-use CodeCommerce\AlexaApi\Model\Intent;
 use CodeCommerce\AlexaApi\Model\Outspeech;
 use CodeCommerce\AlexaApi\Model\Request;
 use CodeCommerce\AlexaApi\Model\Response;

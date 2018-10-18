@@ -18,6 +18,46 @@ class Intent
     protected $confirmationStatus;
 
     /**
+     * @var array
+     */
+    protected $slots = [];
+
+    /**
+     * @param $slot
+     * @return $this
+     */
+    public function setSlot($slot)
+    {
+        if (!$this->hasSlot($slot->getName())) {
+            $this->slots[$slot->getName()] = $slot;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param $slotName
+     * @return bool|mixed
+     */
+    public function getSlot($slotName)
+    {
+        if ($this->hasSlot($slotName)) {
+            return $this->slots[$slotName];
+        }
+
+        return false;
+    }
+
+    /**
+     * @param $slot
+     * @return bool
+     */
+    protected function hasSlot($slot)
+    {
+        return array_key_exists($slot, $this->slots);
+    }
+
+    /**
      * @return mixed
      */
     public function getName()

@@ -3,6 +3,7 @@
 namespace CodeCommerce\AlexaApi\Core;
 
 use CodeCommerce\AlexaApi\Model\Intent;
+use CodeCommerce\AlexaApi\Model\Slot;
 
 /**
  * Class Request
@@ -57,6 +58,18 @@ class RequestParser
         $this->_intent = new Intent();
         $this->_intent->setName($this->_jsonObject->intent->name)
             ->setConfirmationStatus($this->_jsonObject->intent->confirmationStatus);
+
+        if (property_exists($this->_jsonObject->intent, 'slots')) {
+            foreach ($this->_jsonObject->intent->slots as $jsonSlot) {
+                $slot = new Slot();
+                $slot->setName($jsonSlot->name)
+                    ->setValue($jsonSlot->value)
+                    ->setConfirmationStatus($jsonSlot->confirmationStatus)
+                    ->setSource($jsonSlot->source);
+
+                $this->_intent->setSlot($slot);
+            }
+        }
     }
 
     /**
