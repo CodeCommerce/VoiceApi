@@ -13,6 +13,7 @@ class BackgroundImage
 {
     protected $contentDescription;
     protected $sources = [];
+    protected $title;
 
     /**
      * @return mixed

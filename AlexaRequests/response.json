@@ -6,17 +6,21 @@
         "type": "Display.RenderTemplate",
         "template": {
           "type": "BodyTemplate1",
-          "token": "CheeseFactView",
-          "backButton": "HIDDEN",
-          "title": "Did You Know?",
-          "textContent": {
-            "primaryText": {
-              "type": "RichText",
-              "text": "The world’s stinkiest cheese is from Northern France"
-            }
-          }
+          "token": null,
+          "backButton": "VISIBLE",
+          "backgroundImage": "https://www.designguide.at/fileadmin/_migrated/pics/Logo_-_Porsche2.jpg",
+          "title": "Testtitel",
+          "textContent": null
         }
       }
-    ]
+    ],
+    "outputSpeech": {
+      "type": "PlainText",
+      "text": "Hallo Herr Mustermann - wie geht es ihnen",
+      "ssml": null,
+      "playBehavior": null
+    },
+    "reprompt": null,
+    "shouldEndSession": null
   }
 }
