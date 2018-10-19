@@ -8,6 +8,7 @@ use CodeCommerce\AlexaApi\Model\Request;
 use CodeCommerce\AlexaApi\Model\Response;
 use CodeCommerce\AlexaApi\Model\ResponseBody;
 use CodeCommerce\AlexaApi\Model\SSML;
+use CodeCommerce\AlexaApi\Model\System;
 
 /**
  * Class TestIntentAttribute
@@ -28,11 +29,13 @@ class TestIntentAttribute implements IntentsInterface
     /**
      * TestIntent constructor.
      * @param Request $request
+     * @param System  $system
      */
-    public function __construct(Request $request)
+    public function __construct(Request $request, System $system)
     {
         $this->request = $request;
         $this->intent = $request->getIntent();
+        $this->system = $system;
     }
 
     /**

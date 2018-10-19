@@ -41,10 +41,14 @@ class Outspeech
 
     /**
      * Outspeech constructor.
+     * @param null $sMessage
      */
-    public function __construct()
+    public function __construct($sMessage = null)
     {
         $this->setType(self::TYPE_PLAIN_TEXT);
+        if (null !== $sMessage) {
+            $this->setText($sMessage);
+        }
     }
 
     /**

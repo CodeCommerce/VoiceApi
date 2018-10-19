@@ -2,8 +2,13 @@
 
 namespace CodeCommerce\AlexaApi\Controller;
 
+use CodeCommerce\AlexaApi\Core\ContextParser;
 use CodeCommerce\AlexaApi\Core\RequestParser;
 use CodeCommerce\AlexaApi\Core\RequestRouter;
+use CodeCommerce\AlexaApi\Model\Outspeech;
+use CodeCommerce\AlexaApi\Model\Response;
+use CodeCommerce\AlexaApi\Model\ResponseBody;
+use CodeCommerce\AlexaApi\Model\System;
 use CodeCommerce\AlexaApi\Model\Intent;
 
 /**
@@ -26,6 +31,14 @@ class RequestHandler
      * @var Intent
      */
     protected $_intent;
+    /**
+     * @var ContextParser
+     */
+    protected $_contextParser;
+    /**
+     * @var System
+     */
+    protected $system;
 
     /**
      * RequestHandler constructor.
@@ -39,10 +52,17 @@ class RequestHandler
             if ($this->checkRequest()) {
                 $this->setRequestParser($this->_jsonObject->request);
                 $this->setIntent($this->getRequestParser()->getIntent());
+                $this->setContextParser($this->_jsonObject->context);
+                $this->setSystem($this->_contextParser->getSystem());
             }
             $this->doRequest();
         } catch (\Exception $exception) {
-            die($exception->getMessage());
+            $responseHandler = new ResponseHandler();
+            $responseBody = new ResponseBody();
+            $response = new Response();
+            $response->setOutputSpeech(new Outspeech($exception->getMessage()));
+            $responseBody->setResponse($response);
+            die($responseHandler->sendResponse($responseBody));
         }
     }
 
@@ -63,6 +83,22 @@ class RequestHandler
     }
 
     /**
+     * @return System
+     */
+    public function getSystem(): System
+    {
+        return $this->system;
+    }
+
+    /**
+     * @param System $system
+     */
+    public function setSystem(System $system): void
+    {
+        $this->system = $system;
+    }
+
+    /**
      * @return mixed
      */
     public function getRequestParser()
@@ -71,7 +107,16 @@ class RequestHandler
     }
 
     /**
+     * @param $context
+     */
+    public function setContextParser($context)
+    {
+        $this->_contextParser = new ContextParser($context);
+    }
+
+    /**
      * @param $oRequest
+     * @throws \Exception
      */
     public function setRequestParser($oRequest)
     {
@@ -91,13 +136,16 @@ class RequestHandler
         return true;
     }
 
+    /**
+     *
+     */
     protected function doRequest()
     {
         $router = new RequestRouter();
         $intentClass = $router->getRoute($this->getIntent()->getName());
 
         if (class_exists($intentClass)) {
-            $intent = new $intentClass($this->getRequestParser()->getRequest());
+            $intent = new $intentClass($this->getRequestParser()->getRequest(), $this->getSystem());
             $intent->runIntent();
         }
     }

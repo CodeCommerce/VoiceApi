@@ -29,6 +29,7 @@ class RequestParser
     /**
      * Request constructor.
      * @param $jsonObject
+     * @throws \Exception
      */
     public function __construct($jsonObject)
     {
@@ -55,9 +56,13 @@ class RequestParser
      */
     protected function setIntent()
     {
-        $this->_intent = new Intent();
-        $this->_intent->setName($this->_jsonObject->intent->name)
-            ->setConfirmationStatus($this->_jsonObject->intent->confirmationStatus);
+        if (property_exists($this->_jsonObject, 'intent')) {
+            $this->_intent = new Intent();
+            $this->_intent->setName($this->_jsonObject->intent->name)
+                ->setConfirmationStatus($this->_jsonObject->intent->confirmationStatus);
+        } else {
+            throw new \Exception('Entschuldige, leider ist ein Fehler aufgetreten.');
+        }
 
         if (property_exists($this->_jsonObject->intent, 'slots')) {
             foreach ($this->_jsonObject->intent->slots as $jsonSlot) {

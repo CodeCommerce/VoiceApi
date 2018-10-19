@@ -3,6 +3,7 @@
 namespace CodeCommerce\AlexaApi\Intents;
 
 use CodeCommerce\AlexaApi\Controller\ResponseHandler;
+use CodeCommerce\AlexaApi\Model\System;
 use CodeCommerce\AlexaApi\Model\BackgroundImage;
 use CodeCommerce\AlexaApi\Model\Directives;
 use CodeCommerce\AlexaApi\Model\Outspeech;
@@ -23,12 +24,19 @@ class TestIntent implements IntentsInterface
     protected $request;
 
     /**
+     * @var System
+     */
+    protected $system;
+
+    /**
      * TestIntent constructor.
      * @param Request $request
+     * @param System  $system
      */
-    public function __construct(Request $request)
+    public function __construct(Request $request, System $system)
     {
         $this->request = $request;
+        $this->system = $system;
     }
 
     /**
@@ -54,6 +62,10 @@ class TestIntent implements IntentsInterface
     {
         $outSpeech = new Outspeech();
         $outSpeech->setText('Hallo Herr Mustermann - wie geht es ihnen');
+
+        if ($this->system->getDisplay()) {
+            $t = 1;
+        }
 
         return $outSpeech;
     }

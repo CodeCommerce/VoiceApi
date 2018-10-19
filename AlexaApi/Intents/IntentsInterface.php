@@ -2,6 +2,7 @@
 
 namespace CodeCommerce\AlexaApi\Intents;
 
+use CodeCommerce\AlexaApi\Model\System;
 use CodeCommerce\AlexaApi\Model\Request;
 
 /**
@@ -13,8 +14,9 @@ interface IntentsInterface
     /**
      * IntentsInterface constructor.
      * @param Request $request
+     * @param System  $system
      */
-    public function __construct(Request $request);
+    public function __construct(Request $request, System $system);
 
     /**
      * @return mixed
