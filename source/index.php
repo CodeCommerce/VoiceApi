@@ -12,8 +12,8 @@ if ($bIsDev) {
 
     $logger = new Monolog\Logger('requestlog');
     $f = fopen("../log/request_" . date("His_dmY") . ".log", "a+");
-//    $logger->pushHandler(new StreamHandler($f, $logger::WARNING));
-//    $logger->warning(file_get_contents('php://input'));
+    $logger->pushHandler(new StreamHandler($f, $logger::WARNING));
+    $logger->warning(file_get_contents('php://input'));
 }
 
 $request = new CodeCommerce\AlexaApi\Controller\RequestHandler($json);

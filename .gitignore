@@ -4,4 +4,5 @@ vendor/*
 
 .idea/*
 AlexaRequests/
-log/
+log/*
+!/log/dir.txt
