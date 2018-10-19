@@ -67,7 +67,11 @@ class Device
      */
     public function getDisplay()
     {
-        return $this->display;
+        if ($this->display) {
+            return $this->display;
+        }
+
+        return false;
     }
 
     /**

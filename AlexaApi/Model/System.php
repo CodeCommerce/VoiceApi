@@ -12,6 +12,8 @@ use CodeCommerce\AlexaApi\Model\User;
  */
 class System
 {
+    const SUPPORT_TYPE_DISPLAY = 'display';
+
     /**
      * @var Application
      */
@@ -154,11 +156,25 @@ class System
     }
 
     /**
+     * @param $type
+     * @return bool
+     */
+    public function supports($type = self::SUPPORT_TYPE_DISPLAY)
+    {
+        switch ($type) {
+            case self::SUPPORT_TYPE_DISPLAY:
+                return (bool)$this->getDisplay();
+        }
+
+        return false;
+    }
+
+    /**
      * @return mixed
      */
     public function getDisplay()
     {
-        if ($this->device) {
+        if (null !== $this->device) {
             return $this->getDevice()->getDisplay();
         }
 
