@@ -11,6 +11,13 @@ use CodeCommerce\AlexaApi\Model\ResponseBody;
  */
 class ResponseHandler
 {
+    public function __construct(ResponseBody $responseBody = null)
+    {
+        if (null !== $responseBody) {
+            $this->sendResponse($responseBody);
+        }
+    }
+
     /**
      * @param ResponseBody $responseBody
      */
@@ -18,7 +25,7 @@ class ResponseHandler
     {
         $this->addHeader();
         $responseFormatter = new ResponseFormatter($responseBody);
-        echo $responseFormatter->getFormattedResponse();
+        die($responseFormatter->getFormattedResponse());
     }
 
     protected function addHeader()

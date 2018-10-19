@@ -194,10 +194,13 @@ class SSML
 
     /**
      * @param $text
+     * @return SSML
      */
     public function addText($text)
     {
         $this->addOutput($text);
+
+        return $this;
     }
 
     /**
@@ -230,6 +233,17 @@ class SSML
     public function addDate($date, $format = self::DATEFORMAT_DAY_MONTH_YEAR)
     {
         $this->addTextAs($date, self::INTERPRET_AS_DATE, $format);
+
+        return $this;
+    }
+
+    /**
+     * @param $time
+     * @return $this
+     */
+    public function addTime($time)
+    {
+        $this->addTextAs($time, self::INTERPRET_AS_TIME);
 
         return $this;
     }

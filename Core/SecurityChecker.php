@@ -3,7 +3,6 @@
 namespace CodeCommerce\AlexaApi\Core;
 
 use CodeCommerce\AlexaApi\Model\Application;
-use CodeCommerce\AlexaApi\Model\System;
 use Symfony\Component\Yaml\Yaml;
 
 class SecurityChecker
@@ -12,7 +11,11 @@ class SecurityChecker
 
     public function __construct()
     {
-        $file = __DIR__ . '/../Config/system.yml';
+        if (file_exists(__DIR__ . '/../../Alexa/Config/system.yml')) {
+            $file = __DIR__ . '/../../Alexa/Config/system.yml';
+        } else {
+            $file = __DIR__ . '/../Config/system.yml';
+        }
         $this->config = Yaml::parseFile($file);
     }
 

@@ -87,7 +87,7 @@ class RequestHandler
     /**
      * @return System
      */
-    public function getSystem(): System
+    public function getSystem()
     {
         return $this->system;
     }
@@ -95,7 +95,7 @@ class RequestHandler
     /**
      * @param System $system
      */
-    public function setSystem(System $system): void
+    public function setSystem(System $system)
     {
         $this->system = $system;
     }
@@ -139,6 +139,16 @@ class RequestHandler
     }
 
     /**
+     * @param System $system
+     * @throws \Exception
+     */
+    protected function securityCheck(System $system)
+    {
+        $security = new SecurityChecker();
+        $security->checkAppId($system->getApplication());
+    }
+
+    /**
      *
      */
     protected function doRequest()
@@ -150,15 +160,5 @@ class RequestHandler
             $intent = new $intentClass($this->getRequestParser()->getRequest(), $this->getSystem());
             $intent->runIntent();
         }
-    }
-
-    /**
-     * @param System $system
-     * @throws \Exception
-     */
-    protected function securityCheck(System $system)
-    {
-        $security = new SecurityChecker();
-        $security->checkAppId($system->getApplication());
     }
 }
