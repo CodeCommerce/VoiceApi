@@ -5,6 +5,7 @@ namespace CodeCommerce\AlexaApi\Controller;
 use CodeCommerce\AlexaApi\Core\ContextParser;
 use CodeCommerce\AlexaApi\Core\RequestParser;
 use CodeCommerce\AlexaApi\Core\RequestRouter;
+use CodeCommerce\AlexaApi\Core\SecurityChecker;
 use CodeCommerce\AlexaApi\Model\Outspeech;
 use CodeCommerce\AlexaApi\Model\Response;
 use CodeCommerce\AlexaApi\Model\ResponseBody;
@@ -54,6 +55,7 @@ class RequestHandler
                 $this->setIntent($this->getRequestParser()->getIntent());
                 $this->setContextParser($this->_jsonObject->context);
                 $this->setSystem($this->_contextParser->getSystem());
+                $this->securityCheck($this->getSystem());
             }
             $this->doRequest();
         } catch (\Exception $exception) {
@@ -148,5 +150,15 @@ class RequestHandler
             $intent = new $intentClass($this->getRequestParser()->getRequest(), $this->getSystem());
             $intent->runIntent();
         }
+    }
+
+    /**
+     * @param System $system
+     * @throws \Exception
+     */
+    protected function securityCheck(System $system)
+    {
+        $security = new SecurityChecker();
+        $security->checkAppId($system->getApplication());
     }
 }
