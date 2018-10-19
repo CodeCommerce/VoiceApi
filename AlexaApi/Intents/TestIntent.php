@@ -46,7 +46,9 @@ class TestIntent implements IntentsInterface
     {
         $response = new Response();
         $response->setOutputSpeech($this->getTestOutSpeech());
-        $response->setDirectives($this->getTestDirective());
+//        if ($this->system->getDisplay()) {
+//            $response->setDirectives($this->getTestDirective());
+//        }
 
         $responseBody = new ResponseBody();
         $responseBody->setResponse($response);
@@ -62,10 +64,6 @@ class TestIntent implements IntentsInterface
     {
         $outSpeech = new Outspeech();
         $outSpeech->setText('Hallo Herr Mustermann - wie geht es ihnen');
-
-        if ($this->system->getDisplay()) {
-            $t = 1;
-        }
 
         return $outSpeech;
     }
