@@ -3,6 +3,7 @@
 namespace CodeCommerce\AlexaApi\Intents;
 
 use CodeCommerce\AlexaApi\Controller\ResponseHandler;
+use CodeCommerce\AlexaApi\Model\Reprompt;
 use CodeCommerce\AlexaApi\Model\System;
 use CodeCommerce\AlexaApi\Model\BackgroundImage;
 use CodeCommerce\AlexaApi\Model\Directives;
@@ -50,6 +51,8 @@ class TestIntent implements IntentsInterface
             $response->setDirectives($this->getTestDirective());
         }
 
+        $response->setReprompt($this->addReprompt());
+
         $responseBody = new ResponseBody();
         $responseBody->setResponse($response);
 
@@ -91,5 +94,15 @@ class TestIntent implements IntentsInterface
         $directive->setTemplate($template);
 
         return $directive;
+    }
+
+    protected function addReprompt()
+    {
+        $outputSpeech = new Outspeech();
+        $outputSpeech->setText('Wie geht es dir?');
+        $reprompt = new Reprompt();
+        $reprompt->setOutputSpeech($outputSpeech);
+
+        return $reprompt;
     }
 }

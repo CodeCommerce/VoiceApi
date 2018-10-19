@@ -78,7 +78,7 @@ class Response
      * @param mixed $reprompt
      * @return Response
      */
-    public function setReprompt($reprompt)
+    public function setReprompt(Reprompt $reprompt)
     {
         $this->reprompt = $reprompt;
 
