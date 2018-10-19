@@ -1,7 +1,8 @@
 {
   "name": "CodeCommerce/AlexaApi",
-  "description": "",
+  "description": "Amazon Alexa Library",
   "version": "1.0",
+  "type": "library",
   "homepage": "https://www.codecommerce.de",
   "author": {
     "name": "Christopher Bauer",
@@ -11,6 +12,16 @@
   "support": {
     "email": "info@codecommerce.de",
     "homepage": "https://www.codecommerce.de"
+  },
+  "require": {
+    "monolog/monolog": "^1.23",
+    "CodeCommerce/AlexaApi": "^1.0",
+    "symfony/yaml": "^4.1",
+    "symfony/serializer": "^4.1",
+    "symfony/property-access": "^4.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.4"
   },
   "autoload": {
     "psr-4": {
