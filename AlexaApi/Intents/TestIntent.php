@@ -55,6 +55,7 @@ class TestIntent implements IntentsInterface
 
         $responseBody = new ResponseBody();
         $responseBody->setResponse($response);
+        $responseBody->addSessionParameter('intent', 'test');
 
         $responseHandler = new ResponseHandler();
         $responseHandler->sendResponse($responseBody);

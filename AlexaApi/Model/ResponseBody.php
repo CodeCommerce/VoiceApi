@@ -18,6 +18,28 @@ class ResponseBody
     protected $response;
 
     /**
+     * @var array
+     */
+    protected $session = [];
+
+    /**
+     * @return mixed
+     */
+    public function getSession()
+    {
+        return $this->session;
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     */
+    public function addSessionParameter($key, $value)
+    {
+        $this->session[$key] = $value;
+    }
+
+    /**
      * ResponseBody constructor.
      */
     public function __construct()

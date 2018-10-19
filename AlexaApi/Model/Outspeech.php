@@ -46,6 +46,8 @@ class Outspeech
     public function __construct($sMessage = null)
     {
         $this->setType(self::TYPE_PLAIN_TEXT);
+        $this->setPlayBehavior(self::PLAY_BEHAVIOR_ENQUEUE);
+
         if (null !== $sMessage) {
             $this->setText($sMessage);
         }
