@@ -11,6 +11,7 @@ use CodeCommerce\AlexaApi\Model\Response;
 use CodeCommerce\AlexaApi\Model\ResponseBody;
 use CodeCommerce\AlexaApi\Model\System;
 use CodeCommerce\AlexaApi\Model\Intent;
+use Monolog\Logger;
 
 /**
  * Class RequestHandler
@@ -42,12 +43,21 @@ class RequestHandler
     protected $system;
 
     /**
+     * @var Logger
+     */
+    protected $logger;
+
+    /**
      * RequestHandler constructor.
      * @param $jsonObject
      */
-    public function __construct($jsonObject)
+    public function __construct($jsonObject, $logger = null)
     {
         $this->_jsonObject = $jsonObject;
+
+        if(null !== $logger){
+            $this->logger = $logger;
+        }
 
         try {
             if ($this->checkRequest()) {
