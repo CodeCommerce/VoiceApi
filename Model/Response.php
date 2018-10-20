@@ -29,6 +29,18 @@ class Response
     protected $directives = [];
 
     /**
+     * Response constructor.
+     * @param Outspeech|null $outputSpeech
+     */
+    public function __construct($outputSpeech = null)
+    {
+        if (null !== $outputSpeech) {
+            $this->outputSpeech = $outputSpeech;
+        }
+        $this->shouldEndSession = true;
+    }
+
+    /**
      * @return mixed
      */
     public function getDirectives()

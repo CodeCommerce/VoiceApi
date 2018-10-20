@@ -105,7 +105,7 @@ class Outspeech
      */
     public function setSsml($ssml)
     {
-        $this->ssml = $ssml;
+        $this->ssml = $ssml->getText();
 
         return $this;
     }

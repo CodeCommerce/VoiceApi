@@ -61,7 +61,7 @@ class RequestParser
             $this->_intent->setName($this->_jsonObject->intent->name)
                 ->setConfirmationStatus($this->_jsonObject->intent->confirmationStatus);
         } else {
-            throw new \Exception('Entschuldige, leider ist ein Fehler aufgetreten.');
+            throw new \Exception(var_export($this->_jsonObject) . 'Entschuldige, leider ist ein Fehler aufgetreten.');
         }
 
         if (property_exists($this->_jsonObject->intent, 'slots')) {

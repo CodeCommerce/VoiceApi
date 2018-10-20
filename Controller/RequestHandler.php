@@ -49,13 +49,14 @@ class RequestHandler
 
     /**
      * RequestHandler constructor.
-     * @param $jsonObject
+     * @param      $jsonObject
+     * @param null $logger
      */
     public function __construct($jsonObject, $logger = null)
     {
         $this->_jsonObject = $jsonObject;
 
-        if(null !== $logger){
+        if (null !== $logger) {
             $this->logger = $logger;
         }
 
