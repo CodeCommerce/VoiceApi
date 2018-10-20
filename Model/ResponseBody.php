@@ -41,9 +41,13 @@ class ResponseBody
 
     /**
      * ResponseBody constructor.
+     * @param Response|null $response
      */
-    public function __construct()
+    public function __construct(Response $response = null)
     {
+        if (null !== $response) {
+            $this->response = $response;
+        }
         $this->setVersion('1.0');
     }
 
