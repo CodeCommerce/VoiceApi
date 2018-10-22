@@ -54,6 +54,10 @@ class RequestHandler
      */
     public function __construct($jsonObject, $logger = null)
     {
+        if (!defined('TEST_MODE')) {
+            define('TEST_MODE', false);
+        }
+
         $this->_jsonObject = $jsonObject;
 
         if (null !== $logger) {
@@ -156,7 +160,8 @@ class RequestHandler
     protected function securityCheck(System $system)
     {
         $security = new SecurityChecker();
-        $security->checkAppId($system->getApplication());
+        $security->checkAppId($system->getApplication())
+            ->checkCertification();
     }
 
     /**
