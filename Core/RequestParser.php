@@ -39,6 +39,41 @@ class RequestParser
     }
 
     /**
+     * @return bool
+     */
+    public function getIntent()
+    {
+        if (null !== $this->_intent) {
+            return $this->_intent;
+        }
+
+        return false;
+    }
+
+    /**
+     *  set intent of request
+     */
+    protected function setIntent()
+    {
+
+        if (property_exists($this->_jsonObject, 'intent')) {
+            $this->setIntentAndSlots();
+        } elseif ($this->_jsonObject->type == 'LaunchRequest') {
+            $this->setLaunchRequestIntent();
+        } else {
+            throw new \Exception(var_export($this->_jsonObject) . 'Entschuldige, leider ist ein Fehler aufgetreten.');
+        }
+    }
+
+    /**
+     * @return \CodeCommerce\AlexaApi\Model\Request
+     */
+    public function getRequest()
+    {
+        return $this->_request;
+    }
+
+    /**
      * set request model
      */
     protected function setRequestModel()
@@ -52,17 +87,13 @@ class RequestParser
     }
 
     /**
-     *  set intent of request
+     *
      */
-    protected function setIntent()
+    protected function setIntentAndSlots()
     {
-        if (property_exists($this->_jsonObject, 'intent')) {
-            $this->_intent = new Intent();
-            $this->_intent->setName($this->_jsonObject->intent->name)
-                ->setConfirmationStatus($this->_jsonObject->intent->confirmationStatus);
-        } else {
-            throw new \Exception(var_export($this->_jsonObject) . 'Entschuldige, leider ist ein Fehler aufgetreten.');
-        }
+        $this->_intent = new Intent();
+        $this->_intent->setName($this->_jsonObject->intent->name)
+            ->setConfirmationStatus($this->_jsonObject->intent->confirmationStatus);
 
         if (property_exists($this->_jsonObject->intent, 'slots')) {
             foreach ($this->_jsonObject->intent->slots as $jsonSlot) {
@@ -78,22 +109,11 @@ class RequestParser
     }
 
     /**
-     * @return bool
+     *
      */
-    public function getIntent()
+    protected function setLaunchRequestIntent()
     {
-        if (null !== $this->_intent) {
-            return $this->_intent;
-        }
-
-        return false;
-    }
-
-    /**
-     * @return \CodeCommerce\AlexaApi\Model\Request
-     */
-    public function getRequest()
-    {
-        return $this->_request;
+        $this->_intent = new Intent();
+        $this->_intent->setName('LaunchRequest');
     }
 }

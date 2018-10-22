@@ -175,6 +175,8 @@ class RequestHandler
         if (class_exists($intentClass)) {
             $intent = new $intentClass($this->getRequestParser()->getRequest(), $this->getSystem());
             $intent->runIntent();
+        }else{
+
         }
     }
 }
