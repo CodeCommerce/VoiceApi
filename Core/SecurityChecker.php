@@ -5,17 +5,30 @@ namespace CodeCommerce\AlexaApi\Core;
 use CodeCommerce\AlexaApi\Model\Application;
 use Symfony\Component\Yaml\Yaml;
 
+/**
+ * Class SecurityChecker
+ * @package CodeCommerce\AlexaApi\Core
+ */
 class SecurityChecker
 {
+    /**
+     * @var integer
+     */
+    const MAX_TIME_TOLERANCE = 150;
+
     /**
      * @var mixed
      */
     protected $config;
+    /**
+     * @var object
+     */
+    protected $jsonRequest;
 
     /**
      * SecurityChecker constructor.
      */
-    public function __construct()
+    public function __construct($jsonRequest)
     {
         if (file_exists(__DIR__ . '/../../Alexa/Config/system.yml')) {
             $file = __DIR__ . '/../../Alexa/Config/system.yml';
@@ -23,6 +36,7 @@ class SecurityChecker
             $file = __DIR__ . '/../Config/system.yml';
         }
         $this->config = Yaml::parseFile($file);
+        $this->jsonRequest = $jsonRequest;
     }
 
     /**
@@ -46,9 +60,14 @@ class SecurityChecker
     public function checkCertification()
     {
         if (!TEST_MODE) {
-            $signatureurl = $_SERVER['HTTP_SIGNATURECERTCHAINURL'];
-            $this->checkSignatureExists($signatureurl);
-            $this->validateSignatureUrl($signatureurl);
+            $signatureUrl = $_SERVER['HTTP_SIGNATURECERTCHAINURL'];
+            $certificateContent = file_get_contents($signatureUrl);
+
+            $this->checkSignatureExists($signatureUrl);
+            $this->isSslUrl($certificateContent, $_SERVER['HTTP_SIGNATURE']);
+            $this->compareSignatureUrl($certificateContent);
+            $this->checkTimestamp($this->jsonRequest->request->timestamp);
+            $this->checkCertificateValidToTime($certificateContent);
         }
 
         return $this;
@@ -69,41 +88,81 @@ class SecurityChecker
     }
 
     /**
-     * @param $signatureurl
+     * @param $certificateContent
+     * @param $signature
+     * @return void
      * @throws \Exception
      */
-    protected function validateSignatureUrl($signatureurl)
+    protected function isSslUrl($certificateContent, $signature)
     {
-        if (!$this->isSslUrl($signatureurl) ||
-            !$this->compareSignatureUrl($signatureurl)
-        ) {
-            header("HTTP/1.0 404 Not Found");
-            exit();
+        $publicKey = openssl_pkey_get_public($certificateContent);
+        $publicKeyDetails = openssl_pkey_get_details($publicKey);
+        $signatureDecoded = base64_decode($signature);
+
+        $sslVerify = openssl_verify(
+            json_encode($this->jsonRequest, JSON_UNESCAPED_SLASHES),
+            $signatureDecoded,
+            $publicKeyDetails['key'],
+            'sha1'
+        );
+
+        if ($sslVerify != '1') {
+            throw new \Exception("SSL failure");
         }
     }
 
     /**
-     * @param $signatureurl
-     * @return bool
+     * @param $certificateContent
+     * @return void
+     * @throws \Exception
      */
-    protected function isSslUrl($signatureurl)
+    protected function compareSignatureUrl($certificateContent)
     {
-        return substr($signatureurl, 0, 8) == 'https://';
+        $cert = openssl_x509_read($certificateContent);
+        $parsedCertificate = openssl_x509_parse($cert, true);
+        if (!$this->checkCertificationCN($parsedCertificate['subject']['CN']) ||
+            !$this->checkSubjectAltName($parsedCertificate['extensions']['subjectAltName'])
+        ) {
+            throw new \Exception('No SSL Zertificate');
+        }
     }
 
     /**
-     * @param $signatureurl
+     * @param $cn
      * @return bool
      */
-    protected function compareSignatureUrl($signatureurl)
+    protected function checkCertificationCN($cn)
     {
-        $validAdresses = [
-            'https://s3.amazonaws.com/echo.api/echo-api-cert-6-ats.pem',
-            'https://s3.amazonaws.com/echo.api/echo-api-cert.pem',
-            'https://s3.amazonaws.com:443/echo.api/echo-api-cert.pem',
-            'https://s3.amazonaws.com/echo.api/../echo.api/echo-api-cert.pem',
-        ];
+        return $cn == 'echo-api.amazon.com';
+    }
 
-        return in_array($signatureurl, $validAdresses);
+    /**
+     * @param $subjectAltName
+     * @return bool
+     */
+    protected function checkSubjectAltName($subjectAltName)
+    {
+        return str_replace("DNS:", "", $subjectAltName) == 'echo-api.amazon.com';
+    }
+
+    /**
+     * @param $timestamp
+     * @throws \Exception
+     */
+    protected function checkTimestamp($timestamp)
+    {
+        if (time() - strtotime($timestamp) > self::MAX_TIME_TOLERANCE) {
+            throw new \Exception('No SSL Zertificate');
+        }
+    }
+
+    protected function checkCertificateValidToTime($certificateContent)
+    {
+        $cert = openssl_x509_read($certificateContent);
+        $parsedCertificate = openssl_x509_parse($cert, true);
+        if ($parsedCertificate['validTo_time_t'] < date("U") &&
+            $parsedCertificate['validFrom_time_t'] < date("U")) {
+            throw new \Exception($parsedCertificate['validTo_time_t']);
+        }
     }
 }

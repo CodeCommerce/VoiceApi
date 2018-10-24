@@ -159,9 +159,14 @@ class RequestHandler
      */
     protected function securityCheck(System $system)
     {
-        $security = new SecurityChecker();
-        $security->checkAppId($system->getApplication())
-            ->checkCertification();
+        try {
+            $security = new SecurityChecker($this->_jsonObject);
+            $security->checkAppId($system->getApplication())
+                ->checkCertification();
+        } catch (\Exception $exception) {
+            header("HTTP/1.1 400 Bad Request");
+            die();
+        }
     }
 
     /**
@@ -175,8 +180,6 @@ class RequestHandler
         if (class_exists($intentClass)) {
             $intent = new $intentClass($this->getRequestParser()->getRequest(), $this->getSystem());
             $intent->runIntent();
-        }else{
-
         }
     }
 }
