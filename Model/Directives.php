@@ -19,8 +19,11 @@ class Directives
      */
     protected $template;
 
-    public function __construct()
+    public function __construct(Template $template = null)
     {
+        if (null !== $template) {
+            $this->setTemplate($template);
+        }
         $this->setType(self::TYPE_DISPLAY_TEMPLATE);
     }
 

@@ -25,6 +25,7 @@ class ContextParser
         $this->setSystem($context->System);
         if (property_exists($context, 'Viewport')) {
             $this->setViewport($context->Viewport);
+            $this->system->setViewPort($this->getViewport());
         }
     }
 

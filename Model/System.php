@@ -12,6 +12,9 @@ use CodeCommerce\AlexaApi\Model\User;
  */
 class System
 {
+    /**
+     *
+     */
     const SUPPORT_TYPE_DISPLAY = 'display';
 
     /**
@@ -22,6 +25,7 @@ class System
      * @var User
      */
     protected $user;
+
     /**
      * @var Device
      */
@@ -37,23 +41,9 @@ class System
     protected $apiAccessToken;
 
     /**
-     * @return string
+     * @var Viewport
      */
-    public function getApiAccessToken()
-    {
-        return $this->apiAccessToken;
-    }
-
-    /**
-     * @param mixed $apiAccessToken
-     * @return System
-     */
-    public function setApiAccessToken($apiAccessToken)
-    {
-        $this->apiAccessToken = $apiAccessToken;
-
-        return $this;
-    }
+    protected $viewport;
 
     /**
      * System constructor.
@@ -73,6 +63,25 @@ class System
         if (property_exists($system, 'apiEndpoint')) {
             $this->setApiEndpoint($system->apiEndpoint);
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getApiAccessToken()
+    {
+        return $this->apiAccessToken;
+    }
+
+    /**
+     * @param mixed $apiAccessToken
+     * @return System
+     */
+    public function setApiAccessToken($apiAccessToken)
+    {
+        $this->apiAccessToken = $apiAccessToken;
+
+        return $this;
     }
 
     /**
@@ -137,6 +146,26 @@ class System
     }
 
     /**
+     * @return bool|Viewport
+     */
+    public function getViewport()
+    {
+        if ($this->hasViewport()) {
+            return $this->viewport;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param Viewport $viewport
+     */
+    public function setViewport(Viewport $viewport)
+    {
+        $this->viewport = $viewport;
+    }
+
+    /**
      * @return mixed
      */
     public function getApiEndpoint()
@@ -176,6 +205,18 @@ class System
     {
         if (null !== $this->device) {
             return $this->getDevice()->getDisplay();
+        }
+
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasViewport()
+    {
+        if (is_a($this->viewport, Viewport::class)) {
+            return true;
         }
 
         return false;

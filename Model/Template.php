@@ -4,26 +4,22 @@ namespace CodeCommerce\AlexaApi\Model;
 
 class Template
 {
+    const BODY_TEMPLATE_1_SIMPLE_TEXT_IMAGES = 'BodyTemplate1';
+    const BODY_TEMPLATE_2_IMAGE_LIMITED_CENTERED_TEXT = 'BodyTemplate2';
+    const BODY_TEMPLATE_3_IMAGE_LIMITED_LEFT_ALIGNED_TEXT = 'BodyTemplate3';
+    const BODY_TEMPLATE_6_TEXT_OPTIONAL_BACKGROUND_IMAGE = 'BodyTemplate6';
+    const BODY_TEMPLATE_7_SCALABLE_FOREGROUND_IMAGE_OPTIONAL_BACKGROUND_IMAGE = 'BodyTemplate7';
+    const LIST_TEMPLATE_1_TEXT_LISTS_OPTIONAL_IMAGES = 'ListTemplate1';
+    const LIST_TEMPLATE_2_IMAGES_LISTS_OPTIONAL_TEXT = 'ListTemplate2';
+    const BACK_BUTTON_VISIBLE = 'VISIBLE';
+    const BACK_BUTTON_HIDDEN = 'HIDDEN';
+    const TEXT_TYPE_PLAINTEXT = 'PlainText';
     protected $type;
     protected $token;
     protected $backButton;
     protected $backgroundImage;
     protected $title;
     protected $textContent = [];
-
-    const BODY_TEMPLATE_1_SIMPLE_TEXT_IMAGES = 'BodyTemplate1';
-    const BODY_TEMPLATE_2_IMAGE_LIMITED_CENTERED_TEXT = 'BodyTemplate2';
-    const BODY_TEMPLATE_3_IMAGE_LIMITED_LEFT_ALIGNED_TEXT = 'BodyTemplate3';
-    const BODY_TEMPLATE_6_TEXT_OPTIONAL_BACKGROUND_IMAGE = 'BodyTemplate6';
-    const BODY_TEMPLATE_7_SCALABLE_FOREGROUND_IMAGE_OPTIONAL_BACKGROUND_IMAGE = 'BodyTemplate7';
-
-    const LIST_TEMPLATE_1_TEXT_LISTS_OPTIONAL_IMAGES = 'ListTemplate1';
-    const LIST_TEMPLATE_2_IMAGES_LISTS_OPTIONAL_TEXT = 'ListTemplate2';
-
-    const BACK_BUTTON_VISIBLE = 'VISIBLE';
-    const BACK_BUTTON_HIDDEN = 'HIDDEN';
-
-    const TEXT_TYPE_PLAINTEXT = 'PlainText';
 
     /**
      * @return mixed
@@ -242,5 +238,20 @@ class Template
         $this->setPrimaryType($type);
 
         return $this;
+    }
+
+    /**
+     * @param      $url
+     * @param null $description
+     */
+    public function addBackgroundImage($url, $description = null)
+    {
+        $backgroundImage = new BackgroundImage();
+        $backgroundImage->setSources($url);
+        if (null !== $description) {
+            $backgroundImage->setContentDescription($description);
+        }
+
+        $this->addBackgroundImage($backgroundImage);
     }
 }
