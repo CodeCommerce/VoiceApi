@@ -262,6 +262,6 @@ class Template
             $backgroundImage->setContentDescription($description);
         }
 
-        $this->addBackgroundImage($backgroundImage);
+        $this->setBackgroundImage($backgroundImage);
     }
 }
