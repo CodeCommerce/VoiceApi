@@ -253,6 +253,7 @@ class Template
     /**
      * @param      $url
      * @param null $description
+     * @return Template
      */
     public function addBackgroundImage($url, $description = null)
     {
@@ -263,5 +264,7 @@ class Template
         }
 
         $this->setBackgroundImage($backgroundImage);
+
+        return $this;
     }
 }
