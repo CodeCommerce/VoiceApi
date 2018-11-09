@@ -3,6 +3,7 @@
 namespace CodeCommerce\AlexaApi\Core;
 
 use CodeCommerce\AlexaApi\Model\System;
+use CodeCommerce\AlexaApi\Model\Viewport;
 
 /**
  * Class ContextParser
@@ -10,14 +11,9 @@ use CodeCommerce\AlexaApi\Model\System;
  */
 class ContextParser
 {
-    /**
-     * @var
-     */
     protected $_jsonObject;
-    /**
-     * @var
-     */
     protected $system;
+    protected $viewport;
 
     /**
      * ContextParser constructor.
@@ -27,6 +23,9 @@ class ContextParser
     {
         $this->_jsonObject = $context;
         $this->setSystem($context->System);
+        if (property_exists($context, 'Viewport')) {
+            $this->setViewport($context->Viewport);
+        }
     }
 
     /**
@@ -43,5 +42,15 @@ class ContextParser
     protected function setSystem($system)
     {
         $this->system = new System($system);
+    }
+
+    protected function setViewport($viewport)
+    {
+        $this->viewport = new Viewport($viewport);
+    }
+
+    public function getViewport()
+    {
+        return $this->viewport;
     }
 }

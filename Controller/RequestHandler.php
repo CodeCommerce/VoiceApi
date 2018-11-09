@@ -46,6 +46,7 @@ class RequestHandler
      * @var Logger
      */
     protected $logger;
+    protected $viewport;
 
     /**
      * RequestHandler constructor.
@@ -70,6 +71,7 @@ class RequestHandler
                 $this->setIntent($this->getRequestParser()->getIntent());
                 $this->setContextParser($this->_jsonObject->context);
                 $this->setSystem($this->_contextParser->getSystem());
+                $this->setViewPort($this->_contextParser->getViewport());
                 if (!TEST_MODE) {
                     $this->securityCheck($this->getSystem());
                 }
@@ -183,5 +185,10 @@ class RequestHandler
             $intent = new $intentClass($this->getRequestParser()->getRequest(), $this->getSystem());
             $intent->runIntent();
         }
+    }
+
+    protected function setViewPort($viewPort)
+    {
+        $this->viewport = $viewPort;
     }
 }
