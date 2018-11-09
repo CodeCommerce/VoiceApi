@@ -70,7 +70,9 @@ class RequestHandler
                 $this->setIntent($this->getRequestParser()->getIntent());
                 $this->setContextParser($this->_jsonObject->context);
                 $this->setSystem($this->_contextParser->getSystem());
-                $this->securityCheck($this->getSystem());
+                if (!TEST_MODE) {
+                    $this->securityCheck($this->getSystem());
+                }
             }
             $this->doRequest();
         } catch (\Exception $exception) {
