@@ -14,12 +14,22 @@ class Template
     const BACK_BUTTON_VISIBLE = 'VISIBLE';
     const BACK_BUTTON_HIDDEN = 'HIDDEN';
     const TEXT_TYPE_PLAINTEXT = 'PlainText';
+
     protected $type;
     protected $token;
     protected $backButton;
     protected $backgroundImage;
     protected $title;
     protected $textContent = [];
+
+    public function __construct($type = null)
+    {
+        if (null === $type) {
+            $this->setType(self::BODY_TEMPLATE_1_SIMPLE_TEXT_IMAGES);
+        } else {
+            $this->setType($type);
+        }
+    }
 
     /**
      * @return mixed
