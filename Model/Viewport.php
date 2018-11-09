@@ -83,7 +83,7 @@ class Viewport
         ]);
         $this->setTouch($viewport->touch);
         $this->setKeyboard($viewport->keyboard);
-        $this->getCurrentDevice();
+        $this->getDeviceName();
     }
 
     /**
@@ -282,6 +282,7 @@ class Viewport
 
     /**
      * @param mixed $currentDevice
+     * @return Viewport
      */
     public function setCurrentDevice($currentDevice)
     {
