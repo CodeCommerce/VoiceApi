@@ -1,7 +1,7 @@
 {
   "name": "codecommerce/alexaapi",
   "description": "Amazon Alexa Library",
-  "version": "1.0",
+  "version": "1.0.2",
   "type": "library",
   "homepage": "https://www.codecommerce.de",
   "author": {
