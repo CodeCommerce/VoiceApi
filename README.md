@@ -2,6 +2,10 @@
 
     composer require codecommerce/alexaapi 
     
+## Vorraussetzungen
+- PHP 7.1
+- Composer
+    
 ## Creating directories and config files
 ### Mac OS
     
