@@ -71,7 +71,7 @@ class ResponseBody
     }
 
     /**
-     * @return mixed
+     * @return Response
      */
     public function getResponse()
     {

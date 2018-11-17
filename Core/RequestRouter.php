@@ -10,7 +10,7 @@ use Symfony\Component\Yaml\Yaml;
  */
 class RequestRouter
 {
-    const ROUTING_FILE_PATH_ROOT = './Alexa/Config/routes.yml';
+    const ROUTING_FILE_PATH_ROOT = __DIR__ . '/../../../../Alexa/Config/routes.yml';
     const ROUTING_FILE_PATH_VENDOR = '/../Config/routes.yml';
     /**
      * @var array

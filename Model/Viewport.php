@@ -82,7 +82,9 @@ class Viewport
             'height' => $viewport->currentPixelHeight,
         ]);
         $this->setTouch($viewport->touch);
-        $this->setKeyboard($viewport->keyboard);
+        if(property_exists($viewport, 'keyboard')) {
+            $this->setKeyboard($viewport->keyboard);
+        }
         $this->getDeviceName();
     }
 

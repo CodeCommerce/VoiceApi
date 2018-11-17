@@ -11,6 +11,9 @@ use Symfony\Component\Yaml\Yaml;
  */
 class SecurityChecker
 {
+    const USER_SYSTEM_CONFIG_PATH = __DIR__ . '/../../../../Alexa/Config/system.yml';
+    const VENDOR_SYSTEM_CONFIG_PATH = __DIR__ . '/../Config/system.yml';
+
     /**
      * @var integer
      */
@@ -30,10 +33,10 @@ class SecurityChecker
      */
     public function __construct($jsonRequest)
     {
-        if (file_exists(__DIR__ . '/../../Alexa/Config/system.yml')) {
-            $file = __DIR__ . '/../../Alexa/Config/system.yml';
+        if (file_exists(self::USER_SYSTEM_CONFIG_PATH)) {
+            $file = self::USER_SYSTEM_CONFIG_PATH;
         } else {
-            $file = __DIR__ . '/../Config/system.yml';
+            $file = self::VENDOR_SYSTEM_CONFIG_PATH;
         }
         $this->config = Yaml::parseFile($file);
         $this->jsonRequest = $jsonRequest;
@@ -59,16 +62,14 @@ class SecurityChecker
      */
     public function checkCertification()
     {
-        if (!TEST_MODE) {
-            $signatureUrl = $_SERVER['HTTP_SIGNATURECERTCHAINURL'];
-            $certificateContent = file_get_contents($signatureUrl);
+        $signatureUrl = $_SERVER['HTTP_SIGNATURECERTCHAINURL'];
+        $certificateContent = file_get_contents($signatureUrl);
 
-            $this->checkSignatureExists($signatureUrl);
-            $this->isSslUrl($certificateContent, $_SERVER['HTTP_SIGNATURE']);
-            $this->compareSignatureUrl($certificateContent);
-            $this->checkTimestamp($this->jsonRequest->request->timestamp);
-            $this->checkCertificateValidToTime($certificateContent);
-        }
+        $this->checkSignatureExists($signatureUrl);
+        $this->isSslUrl($certificateContent, $_SERVER['HTTP_SIGNATURE']);
+        $this->compareSignatureUrl($certificateContent);
+        $this->checkTimestamp($this->jsonRequest->request->timestamp);
+        $this->checkCertificateValidToTime($certificateContent);
 
         return $this;
     }

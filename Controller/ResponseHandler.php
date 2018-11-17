@@ -3,6 +3,7 @@
 namespace CodeCommerce\AlexaApi\Controller;
 
 use CodeCommerce\AlexaApi\Core\ResponseFormatter;
+use CodeCommerce\AlexaApi\Model\Response;
 use CodeCommerce\AlexaApi\Model\ResponseBody;
 
 /**
@@ -26,6 +27,17 @@ class ResponseHandler
         $this->addHeader();
         $responseFormatter = new ResponseFormatter($responseBody);
         die($responseFormatter->getFormattedResponse());
+    }
+
+    /**
+     * adds responsebody and sends response
+     *
+     * @param Response $response
+     */
+    public function send(Response $response)
+    {
+        $responseBody = new ResponseBody($response);
+        $this->sendResponse($responseBody);
     }
 
     protected function addHeader()

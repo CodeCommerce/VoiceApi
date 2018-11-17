@@ -125,4 +125,19 @@ class Response
             unset($this->{$name});
         }
     }
+
+    /**
+     * adds directives with new template
+     *
+     * @param Template $template
+     * @return Template
+     */
+    public function addTemplate(Template $template)
+    {
+        $directive = new Directives();
+        $directive->setTemplate($template);
+        $this->setDirectives($directive);
+
+        return $template;
+    }
 }

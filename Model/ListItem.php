@@ -2,54 +2,22 @@
 
 namespace CodeCommerce\AlexaApi\Model;
 
-class Template
+class ListItem
 {
-    const BODY_TEMPLATE_1_SIMPLE_TEXT_IMAGES = 'BodyTemplate1';
-    const BODY_TEMPLATE_2_IMAGE_LIMITED_CENTERED_TEXT = 'BodyTemplate2';
-    const BODY_TEMPLATE_3_IMAGE_LIMITED_LEFT_ALIGNED_TEXT = 'BodyTemplate3';
-    const BODY_TEMPLATE_6_TEXT_OPTIONAL_BACKGROUND_IMAGE = 'BodyTemplate6';
-    const BODY_TEMPLATE_7_SCALABLE_FOREGROUND_IMAGE_OPTIONAL_BACKGROUND_IMAGE = 'BodyTemplate7';
-    const LIST_TEMPLATE_1_TEXT_LISTS_OPTIONAL_IMAGES = 'ListTemplate1';
-    const LIST_TEMPLATE_2_IMAGES_LISTS_OPTIONAL_TEXT = 'ListTemplate2';
-    const BACK_BUTTON_VISIBLE = 'VISIBLE';
-    const BACK_BUTTON_HIDDEN = 'HIDDEN';
     const TEXT_TYPE_PLAINTEXT = 'PlainText';
 
-    protected $type;
+    /**
+     * @var string
+     */
     protected $token;
-    protected $backButton;
-    protected $backgroundImage;
-    protected $title;
+    /**
+     * @var BackgroundImage
+     */
+    protected $image;
+    /**
+     * @var array
+     */
     protected $textContent = [];
-    protected $listItems = [];
-
-    public function __construct($type = null)
-    {
-        if (null === $type) {
-            $this->setType(self::BODY_TEMPLATE_1_SIMPLE_TEXT_IMAGES);
-        } else {
-            $this->setType($type);
-        }
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param mixed $type
-     * @return Template
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
 
     /**
      * @return mixed
@@ -61,7 +29,7 @@ class Template
 
     /**
      * @param mixed $token
-     * @return Template
+     * @return ListItem
      */
     public function setToken($token)
     {
@@ -73,62 +41,24 @@ class Template
     /**
      * @return mixed
      */
-    public function getBackButton()
+    public function getImage()
     {
-        return $this->backButton;
+        return $this->image;
     }
 
     /**
-     * @param mixed $backButton
-     * @return Template
+     * @param mixed $image
+     * @return ListItem
      */
-    public function setBackButton($backButton)
+    public function setImage($image)
     {
-        $this->backButton = $backButton;
+        $this->image = $image;
 
         return $this;
     }
 
     /**
-     * @return mixed
-     */
-    public function getBackgroundImage()
-    {
-        return $this->backgroundImage;
-    }
-
-    /**
-     * @param mixed $backgroundImage
-     * @return Template
-     */
-    public function setBackgroundImage($backgroundImage)
-    {
-        $this->backgroundImage = $backgroundImage;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param mixed $title
-     * @return Template
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
+     * @return array
      */
     public function getTextContent()
     {
@@ -136,8 +66,8 @@ class Template
     }
 
     /**
-     * @param mixed $textContent
-     * @return Template
+     * @param array $textContent
+     * @return ListItem
      */
     public function setTextContent($textContent)
     {
@@ -245,8 +175,8 @@ class Template
      */
     public function setTertiary($text, $type = self::TEXT_TYPE_PLAINTEXT)
     {
-        $this->setTertiaryText($text);
-        $this->setTertiaryType($type);
+        $this->setPrimaryText($text);
+        $this->setPrimaryType($type);
 
         return $this;
     }
@@ -264,43 +194,8 @@ class Template
             $backgroundImage->setContentDescription($description);
         }
 
-        $this->setBackgroundImage($backgroundImage);
+        $this->setImage($backgroundImage);
 
         return $this;
-    }
-
-    /**
-     * @param ListItem $listItem
-     * @param          $key
-     * @return $this
-     */
-    public function addListItem(ListItem $listItem, $key = null)
-    {
-        if (null === $key) {
-            $listItem->setToken(count($this->getListItems()));
-            $this->listItems[] = $listItem;
-        } else {
-            $listItem->setToken($key);
-            $this->listItems[] = $listItem;
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getListItems()
-    {
-        return $this->listItems;
-    }
-
-    /**
-     * @param $key
-     * @return mixed
-     */
-    public function getListItem($key)
-    {
-        return $this->listItems[$key];
     }
 }
