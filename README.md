@@ -94,3 +94,10 @@ Du kannst dir das Display-Ausgabegerät vom $system zurückgeben lassen und somi
 prüfen ob es eine Displayunterstützung gibt.
 
     $this->system->getDisplay()
+
+## Endpoint Konfigurieren
+
+Die Datei die den Endpoint darstellt muss folgenden Aufruf erhalten
+
+    require __DIR__ . '/../vendor/autoload.php';
+    new CodeCommerce\AlexaApi\Controller\RequestHandler();

@@ -53,10 +53,14 @@ class RequestHandler
      * @param      $jsonObject
      * @param null $logger
      */
-    public function __construct($jsonObject, $logger = null)
+    public function __construct($jsonObject = null, $logger = null)
     {
         if (!defined('TEST_MODE')) {
             define('TEST_MODE', false);
+        }
+
+        if(null === $jsonObject){
+            $jsonObject = json_decode(file_get_contents('php://input'));
         }
 
         $this->_jsonObject = $jsonObject;
