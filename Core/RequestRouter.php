@@ -10,7 +10,7 @@ use Symfony\Component\Yaml\Yaml;
  */
 class RequestRouter
 {
-    const ROUTING_FILE_PATH_ROOT = __DIR__ . '/../../../../Alexa/Config/routes.yml';
+    const ROUTING_FILE_PATH_ROOT   = __DIR__ . '/../../../../Alexa/Config/routes.yml';
     const ROUTING_FILE_PATH_VENDOR = '/../Config/routes.yml';
     /**
      * @var array
@@ -40,6 +40,10 @@ class RequestRouter
         return false;
     }
 
+
+    /**
+     *
+     */
     protected function setRoutes()
     {
         if (file_exists(self::ROUTING_FILE_PATH_ROOT)) {
@@ -51,6 +55,10 @@ class RequestRouter
 
     }
 
+    /**
+     * @param $sIntentName
+     * @param $sClassName
+     */
     public function addRoute($sIntentName, $sClassName) {
         if (!is_array($this->_aRoutes)) {
             $this->_aRoutes = [];

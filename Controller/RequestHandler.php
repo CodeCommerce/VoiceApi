@@ -206,6 +206,9 @@ class RequestHandler
         }
     }
 
+    /**
+     * @param $viewPort
+     */
     protected function setViewPort($viewPort)
     {
         $this->viewport = $viewPort;

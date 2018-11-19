@@ -45,11 +45,17 @@ class ContextParser
         $this->system = new System($system);
     }
 
+    /**
+     * @param $viewport
+     */
     protected function setViewport($viewport)
     {
         $this->viewport = new Viewport($viewport);
     }
 
+    /**
+     * @return mixed
+     */
     public function getViewport()
     {
         return $this->viewport;
