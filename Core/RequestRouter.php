@@ -48,6 +48,14 @@ class RequestRouter
             $file = __DIR__ . self::ROUTING_FILE_PATH_VENDOR;
         }
         $this->_aRoutes = Yaml::parseFile($file);
+
+    }
+
+    public function addRoute($sIntentName, $sClassName) {
+        if (!is_array($this->_aRoutes)) {
+            $this->_aRoutes = [];
+        }
+        $this->_aRoutes[$sIntentName] = $sClassName;
     }
 
     /**

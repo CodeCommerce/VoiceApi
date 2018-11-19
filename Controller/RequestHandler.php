@@ -42,6 +42,8 @@ class RequestHandler
      */
     protected $system;
 
+    protected $_routes;
+
     /**
      * @var Logger
      */
@@ -52,8 +54,9 @@ class RequestHandler
      * RequestHandler constructor.
      * @param      $jsonObject
      * @param null $logger
+     * @param null $routes
      */
-    public function __construct($jsonObject = null, $logger = null)
+    public function __construct($jsonObject = null, $logger = null, $routes = null)
     {
         if (!defined('TEST_MODE')) {
             define('TEST_MODE', false);
@@ -67,6 +70,10 @@ class RequestHandler
 
         if (null !== $logger) {
             $this->logger = $logger;
+        }
+
+        if (null !== $routes) {
+            $this->_routes = $routes;
         }
 
         try {
@@ -170,7 +177,7 @@ class RequestHandler
         try {
             $security = new SecurityChecker($this->_jsonObject);
             $security->checkAppId($system->getApplication())
-                ->checkCertification();
+                     ->checkCertification();
         } catch (\Exception $exception) {
             header("HTTP/1.1 400 Bad Request");
             die();
@@ -183,13 +190,19 @@ class RequestHandler
     protected function doRequest()
     {
         $router = new RequestRouter();
+        if (null !== $this->_routes) {
+            foreach($this->_routes as $sIntentName => $sClassName) {
+                $router->addRoute($sIntentName, $sClassName);
+            }
+        }
+
         $intentClass = $router->getRoute($this->getIntent()->getName());
 
         if (class_exists($intentClass)) {
             $intent = new $intentClass($this->getRequestParser()->getRequest(), $this->getSystem());
             $intent->runIntent();
         } else {
-         throw new \Exception($intentClass . ' not found');   
+            throw new \Exception($intentClass.' not found');
         }
     }
 
