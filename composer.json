@@ -4,11 +4,18 @@
   "version": "1.0.4",
   "type": "library",
   "homepage": "https://www.codecommerce.de",
-  "author": {
-    "name": "Christopher Bauer",
-    "email": "chris@codecommerce.de",
-    "homepage": "https://www.codecommerce.de"
-  },
+  "authors": [
+    {
+      "name": "Christopher Bauer",
+      "email": "chris@codecommerce.de",
+      "homepage": "https://www.codecommerce.de"
+    },
+    {
+      "name": "Alexander Grüßung",
+      "email": "info@gruessung.eu",
+      "homepage": "https://gruessung.eu"
+    }
+  ],
   "support": {
     "email": "info@codecommerce.de",
     "homepage": "https://www.codecommerce.de"
