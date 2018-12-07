@@ -2,10 +2,6 @@
 
     composer require codecommerce/alexaapi 
     
-## Vorraussetzungen
-- PHP 7.1
-- Composer
-    
 ## Creating directories and config files
 ### Mac OS
     
@@ -107,16 +103,22 @@ Die Datei die den Endpoint darstellt muss folgenden Aufruf erhalten
     new CodeCommerce\AlexaApi\Controller\RequestHandler();
     
     
-## Hello World
+## Hintergrundbild hinzufügen
 
-Um eine Ausgabe zu erhalten nutzen Sie diese Methode
+    $backgroundImage = new BackgroundImage();
+    $backgroundImage->setSources('DEINE_URL');
 
-    /**
-     * @return mixed
-     */
-    public function runIntent()
-    {
-        $outSpeech = new Outspeech('Hello World');
-        $response = new Response($outSpeech);
-        (new ResponseHandler())->send($response);
+    $response = new Response($outspeech);
+
+    if ($this->system->getDisplay()) {
+        $template = new Template();
+        $template->setBackgroundImage($backgroundImage)
+            ->setPrimary('Text 1')
+            ->setSecondary('Text 2')
+            ->setTertiary('Text 3')
+            ->setType($template::BODY_TEMPLATE_2_IMAGE_LIMITED_CENTERED_TEXT);
+
+        $directive = new Directives();
+        $directive->setTemplate($template);
+        $response->setDirectives($directive);
     }
