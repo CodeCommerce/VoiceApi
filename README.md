@@ -102,6 +102,18 @@ Die Datei die den Endpoint darstellt muss folgenden Aufruf erhalten
     require __DIR__ . '/../vendor/autoload.php';
     new CodeCommerce\AlexaApi\Controller\RequestHandler();
     
+## Hello World
+Um eine Ausgabe zu erhalten nutzen Sie diese Methode
+     /**
+     * @return mixed
+     */
+    public function runIntent()
+    {
+        $outSpeech = new Outspeech('Hello World');
+        $response = new Response($outSpeech);
+        (new ResponseHandler())->send($response);
+    }
+
     
 ## Hintergrundbild hinzufügen
 
