@@ -104,6 +104,7 @@ Die Datei die den Endpoint darstellt muss folgenden Aufruf erhalten
     
 ## Hello World
 Um eine Ausgabe zu erhalten nutzen Sie diese Methode
+
      /**
      * @return mixed
      */
