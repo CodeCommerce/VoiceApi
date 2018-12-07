@@ -93,7 +93,7 @@ Die API macht nun den Rest und geht auf deinen hinterlegten Intent.
 Du kannst dir das Display-Ausgabegerät vom $system zurückgeben lassen und somit
 prüfen ob es eine Displayunterstützung gibt.
 
-    $this->system->getDisplay()
+    $this->system->hasViewport()
 
 ## Endpoint Konfigurieren
 
