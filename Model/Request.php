@@ -108,4 +108,8 @@ class Request
 
         return $this;
     }
+
+    public function getSlot($slotName){
+        return ($this->getIntent())->getSlot($slotName);
+    }
 }
