@@ -100,7 +100,7 @@ class TestIntent implements IntentsInterface
     protected function addReprompt()
     {
         $outputSpeech = new Outspeech();
-        $outputSpeech->setText('Wie geht es dir?');
+        $outputSpeech->setText('Wie geht es dir? Was ein Spaß!');
         $reprompt = new Reprompt();
         $reprompt->setOutputSpeech($outputSpeech);
 
